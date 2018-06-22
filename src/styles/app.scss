@@ -1,0 +1,28 @@
+html,
+body,
+#root,
+.main,
+.root {
+  height: 100%;
+  font-size: 14px;
+}
+
+.waiting {
+  margin: 300px 0 0;
+  text-align: center;
+}
+
+.main {
+  min-height: 600px;
+  padding: 24px 32px;
+  background: #fff;
+}
+
+.card:hover {
+  box-shadow: none !important;
+}
+
+.ant-layout-has-sider > .ant-layout-sider {
+  float: left;
+  position: relative;
+}

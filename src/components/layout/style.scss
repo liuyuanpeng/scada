@@ -1,0 +1,83 @@
+.layout {
+  height: 100%;
+}
+
+.sider {
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
+  position: relative;
+  height: 100%;
+  z-index: 10;
+}
+
+.logo {
+  background: #002140;
+  overflow: hidden;
+  height: 64px;
+  position: relative;
+  line-height: 64px;
+  padding-left: 24px;
+  transition: all 0.3s;
+
+  img {
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  h1 {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 18px;
+    font-weight: 600;
+  }
+}
+
+.header {
+  padding: 0 12px 0 0;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  position: relative;
+
+  .right {
+    float: right;
+    height: 100%;
+  }
+
+  .account {
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0 12px;
+    display: inline-block;
+    transition: all 0.3s;
+    height: 100%;
+
+    &:hover {
+      background-color: #e6f7ff;
+    }
+
+    .avatar {
+      padding: 15px 8px 20px 0;
+      vertical-align: middle;
+      width: 42px;
+    }
+  }
+}
+
+.main {
+  margin: 24px 24px 0;
+}
+
+.account-menu {
+  width: 160px;
+}
+
+.menu {
+  user-select: none;
+}
+
+.navigation {
+  background-color: #fff;
+  padding: 12px 20px;
+}
