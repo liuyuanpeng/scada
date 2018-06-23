@@ -11,12 +11,12 @@ const config = {
   api: {
     mode: 'cors',
     wds: {
-      prefix: '/',
-      url: 'http://test.zmei.me'
+      prefix: '/v0.1',
+      url: 'http://119.23.9.49:9090'
     },
     defaults: {
-      prefix: '/',
-      url: 'http://test.zmei.me'
+      prefix: '/v0.1',
+      url: 'http://119.23.9.49:9090'
     }
   },
   example: {

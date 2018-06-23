@@ -1,5 +1,6 @@
 import ce, { actions, urlFor, request } from 'cat-eye'
 import { USER_STATUS } from 'config/constant'
+import md5 from 'md5'
 const { api } = request
 
 ce.model({
@@ -59,10 +60,10 @@ ce.model({
     login(data) {
       const { name, password } = data
       return api
-        .post('/login', {
+        .post('/ceqas/session/login', {
           data: {
-            name,
-            password
+            username: name,
+            password: md5(password)
           },
           customError: true
         })

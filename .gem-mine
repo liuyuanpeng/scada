@@ -1,0 +1,6 @@
+{
+  "name": "scada",
+  "platform": "pc",
+  "ui": "antd",
+  "classic": "admin"
+}
