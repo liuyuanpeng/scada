@@ -12,11 +12,11 @@ const config = {
     mode: 'cors',
     wds: {
       prefix: '/v0.1',
-      url: 'http://119.23.9.49:9090'
+      url: 'http://119.23.9.49'
     },
     defaults: {
       prefix: '/v0.1',
-      url: 'http://119.23.9.49:9090'
+      url: 'http://119.23.9.49'
     }
   },
   example: {

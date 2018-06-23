@@ -11,14 +11,15 @@ ce.model({
     },
     accessToken: localStorage.getItem('accessToken'),
     expireAt: localStorage.getItem('expireAt'),
-    status: USER_STATUS.WAIT
+    status: USER_STATUS.WAIT,
+    role: localStorage.getItem('role')
   },
   reducers: {},
   effects: {
     // 启动应用时调用，从localstorage读取token，进行自动登录
     startup() {
-      const accessToken = localStorage.getItem('accessToken')
-      let expireAt = localStorage.getItem('expireAt')
+      // const accessToken = localStorage.getItem('accessToken')
+      // let expireAt = localStorage.getItem('expireAt')
 
       const rediertToLogin = () => {
         this.setField({
@@ -27,34 +28,36 @@ ce.model({
         actions.routing.replace(urlFor('login'))
       }
 
-      if (accessToken) {
-        const now = Date.now() / 1000
-        if (expireAt <= now) {
-          // 已过期
-          rediertToLogin()
-        } else {
-          // 未过期，调用重新登录，更新过期时间
-          api
-            .post('/auto_login', {
-              customError: true
-            })
-            .then(data => {
-              const { user, expire_at: expireAt } = data
-              localStorage.setItem('expireAt', expireAt)
-              this.setField({
-                status: USER_STATUS.LOGINED,
-                expireAt,
-                data: user
-              })
-            })
-            .catch(data => {
-              rediertToLogin()
-            })
-        }
-      } else {
-        // 无token，需要重新登录
-        rediertToLogin()
-      }
+      rediertToLogin()
+
+      // if (accessToken) {
+      //   const now = Date.now() / 1000
+      //   if (expireAt <= now) {
+      //     // 已过期
+      //     rediertToLogin()
+      //   } else {
+      //     // 未过期，调用重新登录，更新过期时间
+      //     api
+      //       .post('/auto_login', {
+      //         customError: true
+      //       })
+      //       .then(data => {
+      //         const { user, expire_at: expireAt } = data
+      //         localStorage.setItem('expireAt', expireAt)
+      //         this.setField({
+      //           status: USER_STATUS.LOGINED,
+      //           expireAt,
+      //           data: user
+      //         })
+      //       })
+      //       .catch(data => {
+      //         rediertToLogin()
+      //       })
+      //   }
+      // } else {
+      //   // 无token，需要重新登录
+      //   rediertToLogin()
+      // }
     },
     // 登录
     login(data) {
@@ -62,20 +65,24 @@ ce.model({
       return api
         .post('/ceqas/session/login', {
           data: {
-            username: name,
-            password: md5(password)
+            username: 'chenxun',
+            password: md5('123456')
           },
           customError: true
         })
         .then(data => {
-          const { user, access_token: accessToken, expire_at: expireAt } = data
-          localStorage.setItem('name', name)
-          localStorage.setItem('accessToken', accessToken)
-          localStorage.setItem('expireAt', expireAt)
+          console.log('data: ', data)
+          const { username, role } = data.data.user
+          const { token, expires } = data.data.user_session
+          localStorage.setItem('name', username)
+          localStorage.setItem('accessToken', token)
+          localStorage.setItem('expireAt', expires)
+          localStorage.setItem('role', role)
           this.setField({
-            data: user,
-            accessToken,
-            expireAt,
+            data: {name: username},
+            role,
+            accessToken: token,
+            expireAt: expires,
             status: USER_STATUS.LOGINED
           })
         })
@@ -85,6 +92,7 @@ ce.model({
       localStorage.removeItem('accessToken')
       localStorage.removeItem('expireAt')
       localStorage.removeItem('name')
+      localStorage.removeItem('role')
       localStorage.removeItem('openKeys')
       this.setField({
         accessToken: undefined,

@@ -4,6 +4,16 @@ import { Modal } from 'antd'
 // 菜单配置
 export default [
   {
+    name: '学校',
+    icon: 'bars',
+    url: 'main.admin.school'
+  },
+  {
+    name: '用户',
+    icon: 'user',
+    url: 'main.admin.user'
+  },
+  {
     name: '后台管理',
     icon: 'setting',
     sub: [

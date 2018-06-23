@@ -26,6 +26,7 @@ const HeaderWrapper = props => {
       </Menu.Item>
     </Menu>
   )
+  console.log('props', props)
   return (
     <Header className={style.header}>
       <div className={style.right}>
