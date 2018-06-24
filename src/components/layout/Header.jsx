@@ -32,7 +32,7 @@ const HeaderWrapper = props => {
       <div className={style.right}>
         <Dropdown overlay={menu}>
           <div className={style.account}>
-            <img src={avatar} alt="" className={style.avatar} />
+            <Icon type="user" style={{fontSize: '30px'}} />
             <span>{props.user.name}</span>
           </div>
         </Dropdown>

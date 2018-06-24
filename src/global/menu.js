@@ -1,80 +1,248 @@
-import React from 'react'
-import { Modal } from 'antd'
+let menus
 
-// 菜单配置
-export default [
-  {
-    name: '学校',
-    icon: 'bars',
-    url: 'main.admin.school'
-  },
-  {
-    name: '用户',
-    icon: 'user',
-    url: 'main.admin.user'
-  },
-  {
-    name: '后台管理',
-    icon: 'setting',
-    sub: [
+export const generateMenus = () => {
+  if (localStorage.getItem('role') === 'SUPER') {
+    menus = [
       {
-        name: '用户管理',
-        icon: 'team',
-        url: 'main.manage.account'
-      },
-      {
-        name: '文章管理',
-        icon: 'book',
-        url: 'main.manage.article'
+        name: '学校',
+        icon: 'bars',
+        url: 'main.admin'
       }
     ]
-  },
-  {
-    name: '基础使用',
-    icon: 'code',
-    sub: [
-      {
-        name: '各式菜单',
-        icon: 'appstore',
-        sub: [
-          {
-            name: '多级菜单',
-            icon: 'bars',
-            sub: [
-              {
-                name: '四级菜单 - 1',
-                icon: 'smile',
-                url: 'main.menu.page1'
-              },
-              {
-                name: '四级菜单 - 2',
-                icon: 'frown',
-                url: 'main.menu.page2'
-              }
-            ]
-          },
-          {
-            name: '事件菜单',
-            icon: 'scan',
-            action(e) {
-              Modal.success({
-                title: '事件菜单',
-                content: <div>响应菜单点击事件</div>
-              })
-            }
-          },
-          {
-            name: '外链菜单',
-            icon: 'link',
-            url: 'https://www.baidu.com'
-          }
-        ]
-      },
-      {
-        name: '嵌套 gem-mine 例子',
-        icon: 'share-alt',
-        url: 'examples'
-      }
-    ]
+    menuCache = {}
+    flatMenu = {}
+    keyPath(menus)
+    flat(menus)
+    return
   }
-]
+  menus = [
+    {
+      name: '学校基本信息',
+      icon: 'info-circle-o',
+      sub: [
+        {
+          name: '基本信息',
+          icon: 'table',
+          url: 'main.school.basic'
+        },
+        {
+          name: '办学机构',
+          icon: 'table',
+          url: 'main.school.educationOrg'
+        }, {
+          name: '规章制度',
+          icon: 'table',
+          url: 'main.school.rools'
+        }
+      ]
+    },
+    {
+      name: '办学情况',
+      icon: 'info-circle-o',
+      sub: [
+        {
+          name: '总体规模',
+          icon: 'table',
+          url: 'main.summary.basic'
+        },
+        {
+          name: '学生来源统计',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '性别年龄职业统计',
+              icon: 'table',
+              url: 'main.summary.genderAgeJob'
+            },
+            {
+              name: '专业户籍统计',
+              icon: 'table',
+              url: 'main.summary.profession'
+            }
+          ]
+        },
+        {
+          name: '全日制教育与继续教育',
+          icon: 'table',
+          url: 'main.summary.compare'
+        },
+        {
+          name: '专业设置',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '学年制',
+              icon: 'table',
+              url: 'main.profession.year'
+            },
+            {
+              name: '学分制',
+              icon: 'table',
+              url: 'main.profession.score'
+            }
+          ]
+        },
+        {
+          name: '教师情况',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '教师构成',
+              icon: 'table',
+              url: 'main.teacher.struction'
+            }
+          ]
+        },
+        {
+          name: '教学资源',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '课程情况',
+              icon: 'table',
+              url: 'main.teach.classes'
+            },
+            {
+              name: '数字资源应用情况',
+              icon: 'table',
+              url: 'main.teach.digits'
+            },
+            {
+              name: '网路课程的应用情况',
+              icon: 'table',
+              url: 'main.teach.network'
+            },
+            {
+              name: '资源库应用情况',
+              icon: 'table',
+              url: 'mian.teach.resStore'
+            }
+          ]
+        },
+        {
+          name: '软硬件建设',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '基本情况',
+              icon: 'table',
+              url: 'main.support.basic'
+            },
+            {
+              name: '合作单位情况',
+              icon: 'table',
+              url: 'main.support.corp'
+            },
+            {
+              name: '校外学习中心',
+              icon: 'table',
+              url: 'main.support.studycenter'
+            },
+            {
+              name: '支持服务的途径',
+              icon: 'table',
+              url: 'main.support.ways'
+            },
+            {
+              name: '支持服务的要求',
+              icon: 'table',
+              url: 'main.support.requires'
+            }
+          ]
+        },
+        {
+          name: '信息化建设情况',
+          icon: 'table',
+          url: 'main.informational'
+        },
+        {
+          name: '经费情况',
+          icon: 'info-circle-o',
+          sub: [
+            {
+              name: '学费基本情况',
+              icon: 'table',
+              url: 'main.funds.tuition'
+            },
+            {
+              name: '经费收入情况',
+              icon: 'table',
+              url: 'main.funds.in'
+            },
+            {
+              name: '经费支持情况',
+              icon: 'table',
+              url: 'main.funds.out'
+            }
+          ]
+        },
+        {
+          name: '内部质量保证',
+          icon: 'table',
+          url: 'main.insideQuality'
+        },
+        {
+          name: '接受外部质量评估',
+          icon: 'table',
+          url: 'main.ousideQuality'
+        },
+        {
+          name: '学生学习效果',
+          icon: 'table',
+          url: 'main.studyEffection'
+        }
+      ]
+    },
+    {
+      name: '非学历继续教育基本情况',
+      icon: 'table',
+      url: 'main.nonCredencial'
+    },
+    {
+      name: '继续教育获奖及立项情况',
+      icon: 'table',
+      url: 'main.rewards'
+    }
+  ]
+  menuCache = {}
+  flatMenu = {}
+  keyPath(menus)
+  flat(menus)
+}
+
+export let menuCache = {}
+
+export let flatMenu = {}
+function flat(arr) {
+  arr.forEach(item => {
+    const url = item.url
+    if (url && !/https?:/.test(url)) {
+      flatMenu[url] = item
+    }
+    if (item.sub) {
+      flat(item.sub)
+    }
+  })
+}
+
+// 给菜单的每个项生成 keyPath，规则是使用数组下标
+function keyPath(arr, parent) {
+  arr.forEach((item, index) => {
+    if (parent) {
+      item.keyPath = parent.keyPath.concat(index)
+    } else {
+      item.keyPath = [index]
+    }
+    menuCache[item.keyPath.join('-')] = item
+    if (item.sub) {
+      keyPath(item.sub, item)
+    }
+  })
+}
+
+export const getMenu = () => {
+  generateMenus()
+  return menus
+}
+
+export default menus

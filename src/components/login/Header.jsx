@@ -10,9 +10,8 @@ export default props => {
     <Header className={style.header}>
       <div className={style.title}>
         <img src={logo} alt="ant design admin" />
-        <span>AntD Admin</span>
+        <span>系统管理</span>
       </div>
-      <p>乘风破浪会有时，直挂云帆济沧海</p>
     </Header>
   )
 }

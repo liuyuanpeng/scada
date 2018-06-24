@@ -1,23 +1,8 @@
 import ce, { rr, router, pathToRegexp, actions } from 'cat-eye'
-import menus from 'global/menu'
+import { flatMenu } from 'global/menu'
 const { LOCATION_CHANGE } = rr
 
 let _init = true
-
-const flatMenu = {}
-function flat(arr) {
-  arr.forEach(item => {
-    const url = item.url
-    if (url && !/https?:/.test(url)) {
-      flatMenu[url] = item
-    }
-    if (item.sub) {
-      flat(item.sub)
-    }
-  })
-}
-
-flat(menus)
 
 let flatRouter
 

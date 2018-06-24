@@ -11,11 +11,11 @@ const config = {
   api: {
     mode: 'cors',
     wds: {
-      prefix: '/v0.1',
+      prefix: '/v0.1/ceqas',
       url: 'http://119.23.9.49'
     },
     defaults: {
-      prefix: '/v0.1',
+      prefix: '/v0.1/ceqas',
       url: 'http://119.23.9.49'
     }
   },

@@ -3,8 +3,8 @@
  * 系统全局常量
  */
 export const ROLE = {
-  ADMIN: 1,
-  USER: 2
+  ADMIN: 'SUPER',
+  USER: 'ADIN'
 }
 
 // 用户登录状态
@@ -16,7 +16,7 @@ export const USER_STATUS = {
 }
 
 // 版权信息
-export const COPYRIGHT = 'Copyright © 2017-2018 gem-mine caolvchong@gmail.com'
+export const COPYRIGHT = ''
 
 // 左侧菜单模式，是否采用紧凑模式
 export const MENU_KNIT = false

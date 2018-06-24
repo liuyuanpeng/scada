@@ -60,7 +60,12 @@ export default smart(
             actions.login.setField({
               error: false
             })
-            actions.routing.replace(urlFor('main'))
+            if (localStorage.getItem('role') === 'SUPER') {
+              actions.routing.replace(urlFor('main.admin'))
+            }
+            else {
+              actions.routing.replace(urlFor('main.admin'))
+            }
           })
           .catch(data => {
             console.log('error%%%%%%%')

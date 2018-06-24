@@ -6,7 +6,7 @@ export default props => {
   return (
     <div className={style.logo}>
       <img src={logo} />
-      <h1>antd admin</h1>
+      <h1>系统管理</h1>
     </div>
   )
 }

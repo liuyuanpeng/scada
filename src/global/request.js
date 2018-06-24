@@ -36,12 +36,13 @@ request.config({
 // 某个域请求设置
 request.api.config({
   before: function (params) {
-    const auth = getIn(params, 'headers.Authorization')
+    const auth = getIn(params, 'headers.token')
     if (!auth) {
       const accessToken = localStorage.getItem('accessToken')
+      console.log('accessToken: ', accessToken)
       if (accessToken) {
         return setIn(params, {
-          'headers.Authorization': 'Bearer ' + accessToken
+          'headers.token': accessToken
         })
       }
     }

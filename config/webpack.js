@@ -1,7 +1,7 @@
 const path = require('path')
 
 // 生成页面的 title
-exports.title = `gem-mine's world`
+exports.title = `系统管理`
 
 // 别名配置
 exports.resolve = {

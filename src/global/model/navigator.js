@@ -1,5 +1,5 @@
 import ce from 'cat-eye'
-import menus from 'global/menu'
+import { getMenu } from 'global/menu'
 
 ce.model({
   name: 'navigation',
@@ -10,7 +10,7 @@ ce.model({
   reducers: {
     setMenu(data = {}) {
       const { keyPath, init } = data
-      let pointer = menus
+      let pointer = getMenu()
       const arr = []
       let openKeys
       if (init) {

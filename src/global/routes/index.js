@@ -12,6 +12,7 @@ import Home from 'components/home'
 import manageRoutes from './manage'
 import examplesRoutes from './examples'
 import nestMenuRoutes from './nest-menu'
+import Admin from 'components/admin'
 
 // 常量
 const LOGIN_PATH = '/login'
@@ -67,7 +68,11 @@ router.register({
         description: '首页'
       },
       manage: manageRoutes,
-      menu: nestMenuRoutes
+      menu: nestMenuRoutes,
+      admin: {
+        path: '/admin',
+        component: Admin
+      }
     }
   },
   examples: examplesRoutes
