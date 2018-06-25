@@ -2,7 +2,7 @@ import ce, { request } from 'cat-eye'
 const { api } = request
 
 ce.model({
-  name: '',
+  name: 'informational', // 信息化建设情况
   state: {
   },
   reducers: {},

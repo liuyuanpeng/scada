@@ -108,7 +108,7 @@ export const generateMenus = () => {
               url: 'main.teach.digits'
             },
             {
-              name: '网路课程的应用情况',
+              name: '网络课程的应用情况',
               icon: 'table',
               url: 'main.teach.network'
             },
@@ -170,7 +170,7 @@ export const generateMenus = () => {
               url: 'main.funds.in'
             },
             {
-              name: '经费支持情况',
+              name: '经费支出情况',
               icon: 'table',
               url: 'main.funds.out'
             }

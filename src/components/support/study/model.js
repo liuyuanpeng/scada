@@ -2,7 +2,7 @@ import ce, { request } from 'cat-eye'
 const { api } = request
 
 ce.model({
-  name: '',
+  name: 'supportStudy', // 校外学习中心
   state: {
   },
   reducers: {},
