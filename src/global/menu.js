@@ -32,7 +32,7 @@ export const generateMenus = () => {
         }, {
           name: '规章制度',
           icon: 'table',
-          url: 'main.school.rools'
+          url: 'main.school.rules'
         }
       ]
     },
@@ -64,7 +64,7 @@ export const generateMenus = () => {
         {
           name: '全日制教育与继续教育',
           icon: 'table',
-          url: 'main.summary.compare'
+          url: 'main.compare'
         },
         {
           name: '专业设置',
@@ -89,7 +89,7 @@ export const generateMenus = () => {
             {
               name: '教师构成',
               icon: 'table',
-              url: 'main.teacher.struction'
+              url: 'main.structure'
             }
           ]
         },
@@ -115,7 +115,7 @@ export const generateMenus = () => {
             {
               name: '资源库应用情况',
               icon: 'table',
-              url: 'mian.teach.resStore'
+              url: 'main.teach.resStore'
             }
           ]
         },
@@ -136,7 +136,7 @@ export const generateMenus = () => {
             {
               name: '校外学习中心',
               icon: 'table',
-              url: 'main.support.studycenter'
+              url: 'main.support.study'
             },
             {
               name: '支持服务的途径',
@@ -184,19 +184,19 @@ export const generateMenus = () => {
         {
           name: '接受外部质量评估',
           icon: 'table',
-          url: 'main.ousideQuality'
+          url: 'main.outsideQuality'
         },
         {
           name: '学生学习效果',
           icon: 'table',
-          url: 'main.studyEffection'
+          url: 'main.studyEffect'
         }
       ]
     },
     {
       name: '非学历继续教育基本情况',
       icon: 'table',
-      url: 'main.nonCredencial'
+      url: 'main.informEducation'
     },
     {
       name: '继续教育获奖及立项情况',
