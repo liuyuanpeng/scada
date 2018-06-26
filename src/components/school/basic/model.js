@@ -12,7 +12,7 @@ ce.model({
 	},
 	reducers: {},
 	effects: {
-		importData(formData) {
+		importExcelData(formData) {
 			// 导入学校基本信息excel表格
 			return api
 				.post('/college/import', {
@@ -80,7 +80,7 @@ ce.model({
 					})
 				})
 		},
-		addCollege(college) {
+		createCollege(college) {
 			// 创建学校基本信息
 			return api
 				.post('/college/create', {
