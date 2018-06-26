@@ -1,0 +1,68 @@
+###开发配置列表
+			/**
+			 * STUDY_MODE  学习形式
+			 *   -  STUDY_MODE_ENUM_WANGLUOJIAOYU  网络教育
+			 *   -  STUDY_MODE_ENUM_HANSHOUJIAOYU  函授教育
+			 *   -  STUDY_MODE_ENUM_YEYUJIAOYU  业余教育
+			 *   -  STUDY_MODE_ENUM_CHENGRENTUOCHAN  成人脱产
+			 *   -  STUDY_MODE_ENUM_KAIFANGJIAOYU  开放教育
+			 
+			 * EDUCATION_LEVEL  办学层次
+			 *   -  EDUCATION_LEVEL_ENUM_GAOQIZHUAN  高起专
+			 *   -  EDUCATION_LEVEL_ENUM_GAOQIBEN  高起本
+			 *   -  EDUCATION_LEVEL_ENUM_ZHUANSHENGBEN  专升本
+			 *   -  EDUCATION_LEVEL_ENUM_OTHER  其他
+			 
+			 * EDUCATION_CATEGORY  教育分类
+			 *   -  EDUCATION_CATEGORY_ENUM_FULLTIME  全日制教育
+			 *   -  EDUCATION_CATEGORY_ENUM_CONTINUE  继续教育
+			 
+			 * STUDENT_ANALYSIS  在学学生来源统计
+			 *   -  STUDENT_ANALYSIS_ENUM_SEX  性别
+			 *        -  STUDENT_ANALYSIS_ENUM_SEX_VALUE_NAN  男
+			 *        -  STUDENT_ANALYSIS_ENUM_SEX_VALUE_NV  女
+			 *   -  STUDENT_ANALYSIS_ENUM_AGE  年龄
+			 *				  -  STUDENT_ANALYSIS_ENUM_AGE_VALUE_20  20岁以内
+			 *				  -  STUDENT_ANALYSIS_ENUM_AGE_VALUE_21_30  21岁-30岁
+			 *				  -  STUDENT_ANALYSIS_ENUM_AGE_VALUE_31_40  31岁-40岁
+			 *				  -  STUDENT_ANALYSIS_ENUM_AGE_VALUE_40  40岁以上
+			 *   -  STUDENT_ANALYSIS_ENUM_JOB  职业
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_XINGZHENGGUANLI  行政管理工作（包括党政机关、事业单位、群众团体行政管理工作）
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_QIYEGUANLI  企业管理工作（如经理、部门经理等）
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_ZHUANYEJISHU  专业技术工作（如工程师、会计师、教师、医生、律师、编辑、记者等）
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_JISHUFUZHU  技术辅助工作（如技术员、教辅人员、护士、秘书、会计、出纳、文秘等）
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_FUWU  服务工作（如保安、餐饮服务、销售服务、市场营销等）
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_YIXIANSHENGCHAN  一线生产工人
+			 *				  -  STUDENT_ANALYSIS_ENUM_JOB_VALUE_QITA  其他
+			 *   -  STUDENT_ANALYSIS_ENUM_MAJOR_BENKE  专业本科层次
+			 *				  -  STUDENT_ANALYSIS_ENUM_MAJOR_BENKE_VALUE_ZHEXUE  哲学
+			 *				  -  ...
+			 *   -  STUDENT_ANALYSIS_ENUM_MAJOR_ZHUANKE  专业专科层次
+			 *				  -  STUDENT_ANALYSIS_ENUM_MAJOR_ZHUANKE_VALUE_CAIJING  财经商贸大类
+			 *				  -  ...
+			 *   -  STUDENT_ANALYSIS_ENUM_HUJI  户籍
+			 *				  -  STUDENT_ANALYSIS_ENUM_HUJI_VALUE_SHENGNEI  省内
+			 *				  -  STUDENT_ANALYSIS_ENUM_HUJI_VALUE_SHENGWAI  省外
+			 
+			 * TEACHER_ANALYSIS  教师情况统计
+			 *   -  TEACHER_ANALYSIS_ENUM_MAJOR  专业技术职务
+			 *				  -  TEACHER_ANALYSIS_ENUM_MAJOR_VALUE_ZHENGGAO  正高
+			 *				  -  ...
+			 *   -  TEACHER_ANALYSIS_ENUM_EDUCATION  学历情况
+			 *				  -  TEACHER_ANALYSIS_ENUM_EDUCATION_VALUE_BOSHI  博士
+			 *				  -  ...
+			 *   -  TEACHER_ANALYSIS_ENUM_AGE  年龄情况
+			 *				  -  TEACHER_ANALYSIS_ENUM_AGE_VALUE_35  35岁以下
+			 *				  -  ...
+			 
+			 * COURSEWARE_APPLY  资源应用情况
+			 *   -  COURSEWARE_APPLY_ENUM_MEDIA  媒体形式
+			 *				  -  COURSEWARE_APPLY_ENUM_MEDIA_VALUE_DOCUMENT  文档（txt、pdf、word）
+			 *				  -  ...
+			 *   -  COURSEWARE_APPLY_ENUM_NET_COURSEWARE  课程形式
+			 *				  -  COURSEWARE_APPLY_ENUM_NET_COURSEWARE_VALUE_PPT_DUB  网络课程（ppt 配音）
+			 *				  -  ...
+			 *   -  COURSEWARE_APPLY_ENUM_RESOURCE  资源库类型
+			 *				  -  COURSEWARE_APPLY_ENUM_RESOURCE_VALUE_QUESTION_BANK  题库
+			 *				  -  ...
+			 */
