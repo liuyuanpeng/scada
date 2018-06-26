@@ -16,6 +16,7 @@ function getUrl(item) {
 }
 
 const Wrapper = props => {
+  console.log('navigator props:', props)
   if (props.menu && props.menu.length) {
     return (
       <div className={style.navigation}>
@@ -43,7 +44,7 @@ const Wrapper = props => {
       </div>
     )
   } else {
-    return <div />
+    return <div>wtf</div>
   }
 }
 

@@ -32,8 +32,8 @@ ce.model({
       }
 
       if (accessToken) {
-        const now = Date.now() / 1000
-        if (createTime + expires <= now) {
+        const now = Date.now()
+        if (parseInt(createTime) + parseInt(expires) * 1000 <= now) {
           // 已过期
           rediertToLogin()
         } else {

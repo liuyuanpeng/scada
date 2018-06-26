@@ -62,9 +62,8 @@ export default smart(
             })
             if (localStorage.getItem('role') === 'SUPER') {
               actions.routing.replace(urlFor('main.admin'))
-            }
-            else {
-              actions.routing.replace(urlFor('main.admin'))
+            } else {
+              actions.routing.replace(urlFor('main.basic'))
             }
           })
           .catch(data => {

@@ -1,5 +1,5 @@
 import ce, { rr, router, pathToRegexp, actions } from 'cat-eye'
-import { flatMenu } from 'global/menu'
+import { getFlatMenu } from 'global/menu'
 const { LOCATION_CHANGE } = rr
 
 let _init = true
@@ -26,7 +26,7 @@ function getMenu(url) {
     const arr = routeKey.split('.')
     while (arr.length) {
       const key = arr.join('.')
-      let menu = flatMenu[key]
+      let menu = getFlatMenu()[key]
       if (menu) {
         if (_init) {
           _init = false

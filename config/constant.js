@@ -7,6 +7,12 @@ export const ROLE = {
   USER: 'ADIN'
 }
 
+export const SERVER = {
+  host: '119.23.9.49',
+  protocol: 'http',
+  prefix: '/v0.1/ceqas'
+}
+
 // 用户登录状态
 export const USER_STATUS = {
   WAIT: 0, // 自动登录等待状态

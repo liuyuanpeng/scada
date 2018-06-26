@@ -12,6 +12,8 @@ import Home from 'components/home'
 import manageRoutes from './manage'
 import examplesRoutes from './examples'
 import nestMenuRoutes from './nest-menu'
+import schoolRoutes from './school'
+
 import Admin from 'components/admin'
 
 // 常量
@@ -72,7 +74,8 @@ router.register({
       admin: {
         path: '/admin',
         component: Admin
-      }
+      },
+      school: schoolRoutes
     }
   },
   examples: examplesRoutes

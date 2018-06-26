@@ -225,6 +225,14 @@ function flat(arr) {
   })
 }
 
+export const getFlatMenu = () => {
+  if (Object.keys(flatMenu).length) {
+    return flatMenu
+  }
+  generateMenus()
+  return flatMenu
+}
+
 // 给菜单的每个项生成 keyPath，规则是使用数组下标
 function keyPath(arr, parent) {
   arr.forEach((item, index) => {

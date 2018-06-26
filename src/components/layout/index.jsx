@@ -6,9 +6,14 @@ import Header from './Header'
 import Menu from './Menu'
 import Navigation from './Navigation'
 import style from './style'
+import { smart, actions } from 'cat-eye'
 const { Content, Sider } = Layout
 
-export default class extends Component {
+class Main extends Component {
+  componentWillMount() {
+    actions.main.getConfigMap()
+  }
+
   render() {
     return (
       <Layout className={style.layout}>
@@ -28,3 +33,10 @@ export default class extends Component {
     )
   }
 }
+
+export default smart(state => {
+  console.log('state: ', state)
+  return {
+    list: state.main.config
+  }
+})(Main)

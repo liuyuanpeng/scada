@@ -18,7 +18,7 @@ request.config({
   },
   loading: function (params) {
     console.log('loading: ', params)
-    this.hideTip = message.loading('您的网络不通畅，请求仍在进行，请稍候...', 15)
+    this.hideTip = message.loading('请求仍在进行，请稍候...', 15)
   },
   error: function (res) {
     console.log('error: ', res)
