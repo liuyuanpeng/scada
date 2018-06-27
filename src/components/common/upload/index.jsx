@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Upload, Button, Icon, message } from 'antd'
-import {SERVER} from 'config/constant'
 
 export default class extends Component {
     static propTypes = {
@@ -43,10 +42,11 @@ export default class extends Component {
       return (
         <Upload
           multiple={false}
+          showUploadList={false}
           headers={
             {token: localStorage.getItem('accessToken')}
           }
-          action={`${SERVER.protocol}://${SERVER.host}${SERVER.prefix}${this.props.action}`}
+          action={`/api_wds/v0.1/ceqas${this.props.action}`}
           onChange={this.onChange}>
           <Button>
             <Icon type="upload" />导入

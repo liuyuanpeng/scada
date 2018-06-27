@@ -9,7 +9,7 @@ export default class extends Component {
 
     render() {
       return (
-        <Page>
+        <Page importUri={'/organization/import'}>
           <div>EducationOrg</div>
         </Page>
       )
