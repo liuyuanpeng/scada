@@ -7,18 +7,16 @@
  *    example.get/post ...
  *    这里的 example 就是一个包装过的 axios 对象
  */
-import {SERVER} from './constant'
-
 const config = {
   api: {
     mode: 'cors',
     wds: {
-      prefix: SERVER.prefix,
-      url: `${SERVER.protocol}://${SERVER.host}`
+      prefix: '/v0.1/ceqas',
+      url: 'http://119.23.9.49'
     },
     defaults: {
-      prefix: SERVER.prefix,
-      url: `${SERVER.protocol}://${SERVER.host}`
+      prefix: '/v0.1/ceqas',
+      url: 'http://119.23.9.49'
     }
   },
   example: {
