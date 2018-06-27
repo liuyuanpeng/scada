@@ -14,7 +14,8 @@ ce.model({
     expires: localStorage.getItem('expires'),
     status: USER_STATUS.WAIT,
     role: localStorage.getItem('role'),
-    createTime: localStorage.getItem('createTime')
+    createTime: localStorage.getItem('createTime'),
+    collegeId: localStorage.getItem('collegeId')
   },
   reducers: {},
   effects: {
@@ -67,13 +68,16 @@ ce.model({
           localStorage.setItem('expires', expires)
           localStorage.setItem('role', role)
           localStorage.setItem('createTime', data.data.user_session.create_time)
+          localStorage.setItem('collegeId', data.data.college.id)
           generateMenus()
           this.setField({
             data: { name: username },
             role,
             accessToken: token,
             expires: expires,
-            status: USER_STATUS.LOGINED
+            status: USER_STATUS.LOGINED,
+            createTime: data.data.user_session.create_time,
+            collegeId: data.data.college.id
           })
         })
     },
@@ -85,10 +89,15 @@ ce.model({
       localStorage.removeItem('name')
       localStorage.removeItem('role')
       localStorage.removeItem('openKeys')
+      localStorage.removeItem('collegeId')
       this.setField({
         accessToken: undefined,
         data: {},
-        status: USER_STATUS.NOT_LOGIN
+        status: USER_STATUS.NOT_LOGIN,
+        role: undefined,
+        expires: undefined,
+        createTime: undefined,
+        collegeId: undefined
       })
       location.href = '/'
     }
