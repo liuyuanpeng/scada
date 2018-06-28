@@ -5,8 +5,8 @@ import Upload from '../upload'
 export default class extends Component {
     static propTypes = {
       importUri: PropTypes.string,
-      uploadSuccess: PropTypes.func,
-      uploadError: PropTypes.func
+      onSuccess: PropTypes.func,
+      onError: PropTypes.func
     }
 
     render() {
@@ -16,8 +16,8 @@ export default class extends Component {
           <div style={{marginBottom: '24px', float: 'right'}}>
             <Upload
               action={this.props.importUri}
-              onSuccess={this.props.uploadSuccess}
-              onError={this.props.uploadError} />
+              onSuccess={this.props.onSuccess}
+              onError={this.props.onError} />
           </div>}
           {this.props.children}
         </div>

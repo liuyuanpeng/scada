@@ -72,8 +72,20 @@ ce.model({
           }
         })
         .then(res => {
+          let data = this.getState().data.concat()
+          if (organization.id) {
+            // 修改
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].id === organization.id) {
+                data[i] = res.data
+                break
+              }
+            }
+          } else {
+            data.push(res.data)
+          }
           this.setField({
-            data: res ? res.data : []
+            data
           })
         })
     },
@@ -88,8 +100,11 @@ ce.model({
           }
         })
         .then(res => {
+          let data = this.getState().data.concat()
+          const dataIndex = data.findIndex(item => item.id === organizationId)
+          data.splice(dataIndex, 1)
           this.setField({
-            data: res ? res.data : []
+            data
           })
         })
     }

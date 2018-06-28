@@ -88,16 +88,16 @@ ce.model({
           })
         })
     },
-    getListByConfig(configCode, excludeConfigEnumCodes) {
+    getListByConfig({code, exCode}) {
       // 获取指定一级配置的配置结构列表(去除该一级配置下指定的二级配置，configCode详见本文件目录下open-config.md)
-      if (this.getState()[configCode] && !excludeConfigEnumCodes) {
+      if (this.getState()[code] && !exCode) {
         return
       }
       return api
         .get('/open-config/list-by-config', {
           params: {
-            'config-code': configCode,
-            'exclude-config-enum-codes': excludeConfigEnumCodes
+            'config-code': code,
+            'exclude-config-enum-codes': exCode
           },
           complete: () => {
             this.setField({

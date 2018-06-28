@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Page from 'components/common/page'
-import { Button, Table } from 'antd'
+import { Button, Table, Popconfirm, message } from 'antd'
 import { smart, actions } from 'cat-eye'
 import OrgFrom from './orgForm'
 
@@ -8,11 +8,13 @@ class EducationOrg extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      visible: false
+      visible: false,
+      type: 'add',
+      formData: {}
     }
   }
   componentWillMount() {
-    actions.openConfig.getListByConfig('STUDY_MODE')
+    actions.openConfig.getListByConfig({code: 'STUDY_MODE'})
     actions.schoolEducationOrg.getList()
   }
 
@@ -36,26 +38,40 @@ class EducationOrg extends Component {
         dataIndex: 'study_mode',
         key: 'study_mode',
         render: (text, record) => {
-          return text.replace(/\|/g, '、')
+          const modes = text.split('|')
+          const modeNames = this.props.studyMode && modes.map(code => {
+            const rt = this.props.studyMode.find((item) => {
+              return item.config_enum.code === code
+            })
+            return rt.config_enum.name
+          })
+          return modeNames ? modeNames.join('、') : ''
         }
       }, {
         title: '自学考试',
         dataIndex: 'has_self_study_exam',
         key: 'has_self_study_exam',
         render: (text, record) => {
-          return record.has_self_study_exam ? '是' : '否'
+          return record.has_self_study_exam ? '有' : '无'
         }
       }, {
         title: '非学历培训',
         dataIndex: 'has_non_degree_education',
         key: 'has_non_degree_education',
         render: (text, record) => {
-          return record.has_non_degree_education ? '是' : '否'
+          return record.has_non_degree_education ? '有' : '无'
+        }
+      }, {
+        title: '归口管理部门',
+        dataIndex: 'manage_department_name',
+        key: 'manage_department_name',
+        render: (text, record) => {
+          return record.manage_department_name || '无'
         }
       }, {
         title: '操作',
-        dataIndex: '',
-        key: '',
+        dataIndex: 'operation',
+        key: 'operation',
         render: (text, record) => {
           return <div>
             <a
@@ -63,11 +79,10 @@ class EducationOrg extends Component {
               onClick={() => this.modify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
-            <a
-              href="javascript:;"
-              onClick={() => this.delete(record)}
-              style={{ marginRight: 8 }}
-            >删除</a>
+            <Popconfirm title="确定要删除?"
+              onConfirm={() => { this.delete(record) }} >
+              <a href="#">删除</a>
+            </Popconfirm>
           </div>
         }
       }
@@ -75,11 +90,35 @@ class EducationOrg extends Component {
   }
 
   data = () => {
-    return this.props.data || []
+    if (this.props.data) {
+      return this.props.data.map((item, index) => {
+        return {...item, key: `${index}`}
+      })
+    }
+  }
+
+  modify = (record) => {
+    this.setState({
+      type: 'edit',
+      visible: true,
+      formData: record
+    })
+  }
+
+  delete = (record) => {
+    actions.schoolEducationOrg.deleteByOrganizationId(record.id)
+      .then(res => {
+        message.info('删除成功!')
+      })
+      .catch(e => {
+        message.error('删除失败!')
+      })
   }
 
   onAdd = () => {
     this.setState({
+      type: 'add',
+      formData: {},
       visible: true
     })
   }
@@ -94,7 +133,21 @@ class EducationOrg extends Component {
       if (err) {
         return
       }
-      console.log(values)
+
+      actions.schoolEducationOrg.saveOrganization({
+        ...this.state.formData,
+        ...values,
+        has_manage_department: values.has_manage_department === 'yes',
+        has_non_degree_education: values.has_non_degree_education === 'yes',
+        has_self_study_exam: values.has_self_study_exam === 'yes',
+        study_mode: values.study_mode.join('|')
+      })
+        .then(res => {
+          message.info('操作成功!')
+        })
+        .catch(e => {
+          message.error('操作失败!')
+        })
       form.resetFields()
       this.setState({ visible: false })
     })
@@ -106,9 +159,13 @@ class EducationOrg extends Component {
     })
   }
 
+  onUploadOK = () => {
+    actions.schoolEducationOrg.getList()
+  }
+
   render() {
     return (
-      <Page importUri={'/organization/import'}>
+      <Page importUri={'/organization/import'} onSuccess={this.onUploadOK}>
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
@@ -117,6 +174,9 @@ class EducationOrg extends Component {
         />
         <OrgFrom
           wrappedComponentRef={this.saveFormRef}
+          data={this.state.formData}
+          studyMode={this.props.studyMode}
+          type={this.state.type}
           onOK={this.onOK}
           onCancel={this.onCancel}
           visible={this.state.visible} />

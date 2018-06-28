@@ -8,21 +8,6 @@ const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const CheckboxGroup = Checkbox.Group
 
-const COLLEGE_BELONGS = [
-  '中央部属高校',
-  '省属/市属院校',
-  '(地级)市属院校',
-  '企业部属院校'
-]
-
-const COLLEGE_NATURES = [
-  '普通本科高校',
-  '高职高专院校',
-  '独立设置成人高校(除电)',
-  '广播电视大学',
-  '开放大学'
-]
-
 const BasicForm = Form.create({
   mapPropsToFields(props) {
     return {
@@ -50,8 +35,10 @@ const BasicForm = Form.create({
       }
     }
     componentWillMount() {
-      actions.openConfig.getListByConfig('EDUCATION_LEVEL')
-      actions.openConfig.getListByConfig('STUDY_MODE')
+      actions.openConfig.getListByConfig({code: 'COLLEGE_BELONG'})
+      actions.openConfig.getListByConfig({code: 'COLLEGE_NATURE'})
+      actions.openConfig.getListByConfig({code: 'EDUCATION_LEVEL'})
+      actions.openConfig.getListByConfig({code: 'STUDY_MODE'})
       actions.schoolBasic.getByCollegeId()
     }
 
@@ -77,7 +64,7 @@ const BasicForm = Form.create({
     }
 
     componentWillReceiveProps(nextProps) {
-      if (this.props.data.other !== nextProps.data.other) {
+      if (nextProps.data.other_education_level) {
         this.setState({
           disableOther: false
         })
@@ -157,8 +144,8 @@ const BasicForm = Form.create({
             <FormItem label="高校归属" {...formItemLayout}>
               {getFieldDecorator('college_belong')(
                 <RadioGroup>
-                  {COLLEGE_BELONGS.map((item, index) => {
-                    return <Radio key={`college_belong_${index}`} value={item}>{item}</Radio>
+                  {this.props.collegeBelong && this.props.collegeBelong.map((item, index) => {
+                    return <Radio key={`college_belong_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Radio>
                   })}
                 </RadioGroup>
               )
@@ -167,8 +154,8 @@ const BasicForm = Form.create({
             <FormItem label="高校性质" {...formItemLayout}>
               {getFieldDecorator('college_nature')(
                 <RadioGroup>
-                  {COLLEGE_NATURES.map((item, index) => {
-                    return <Radio key={`college_nature_${index}`} value={item}>{item}</Radio>
+                  {this.props.collegeNature && this.props.collegeNature.map((item, index) => {
+                    return <Radio key={`college_nature_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Radio>
                   })}
                 </RadioGroup>
               )
@@ -178,13 +165,13 @@ const BasicForm = Form.create({
               {getFieldDecorator('education_level')(
                 <CheckboxGroup>
                   {this.props.educationLevel && this.props.educationLevel.map((item, index) => {
-                    return <Checkbox key={`education_level_${index}`} value={item.config_enum.name}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`education_level_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )
               }
-              <Checkbox checked={!this.state.disableOther} onChange={this.onChange}>其他</Checkbox>
-              {getFieldDecorator('others')(
+              <Checkbox checked={!this.state.disableOther} onClick={this.onChange}>其他</Checkbox>
+              {getFieldDecorator('other_education_level')(
                 <Input disabled={this.state.disableOther} placeholder={this.state.disableOther ? '' : '请输入其他办学层次'} />
               )
               }
@@ -193,7 +180,7 @@ const BasicForm = Form.create({
               {getFieldDecorator('study_mode')(
                 <CheckboxGroup>
                   {this.props.studyMode && this.props.studyMode.map((item, index) => {
-                    return <Checkbox key={`study_mode_${index}`} value={item.config_enum.name}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`study_mode_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )
@@ -229,6 +216,8 @@ const BasicForm = Form.create({
 export default smart(state => {
   return {
     data: state.schoolBasic.data,
+    collegeBelong: state.openConfig.COLLEGE_BELONG,
+    collegeNature: state.openConfig.COLLEGE_NATURE,
     educationLevel: state.openConfig.EDUCATION_LEVEL,
     studyMode: state.openConfig.STUDY_MODE
   }
