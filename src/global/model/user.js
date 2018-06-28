@@ -67,7 +67,7 @@ ce.model({
           localStorage.setItem('expires', expires)
           localStorage.setItem('role', role)
           localStorage.setItem('createTime', data.data.user_session.create_time)
-          localStorage.setItem('collegeId', data.data.college.id)
+          data.data.college && localStorage.setItem('collegeId', data.data.college.id)
           generateMenus()
           this.setField({
             data: { name: username },
