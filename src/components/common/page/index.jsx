@@ -12,10 +12,13 @@ export default class extends Component {
     render() {
       return (
         <div>
-          {this.props.importUri && <Upload
-            action={this.props.importUri}
-            onSuccess={this.props.uploadSuccess}
-            onError={this.props.uploadError} />}
+          {this.props.importUri &&
+          <div style={{marginBottom: '24px', float: 'right'}}>
+            <Upload
+              action={this.props.importUri}
+              onSuccess={this.props.uploadSuccess}
+              onError={this.props.uploadError} />
+          </div>}
           {this.props.children}
         </div>
       )
