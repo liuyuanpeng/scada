@@ -76,7 +76,7 @@ ce.model({
             expires: expires,
             status: USER_STATUS.LOGINED,
             createTime: data.data.user_session.create_time,
-            collegeId: data.data.college.id
+            collegeId: data.data.college ? data.data.college.id : ''
           })
         })
     },
