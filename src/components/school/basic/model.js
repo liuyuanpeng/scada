@@ -8,7 +8,7 @@ const {
 ce.model({
   name: 'schoolBasic', // 学校基本信息
   state: {
-    data: []
+    data: {}
   },
   reducers: {},
   effects: {
@@ -111,7 +111,7 @@ ce.model({
         })
         .then(res => {
           this.setField({
-            data: res ? res.data : []
+            data: res ? res.data : {}
           })
         })
     }

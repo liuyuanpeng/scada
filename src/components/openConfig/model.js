@@ -90,6 +90,9 @@ ce.model({
     },
     getListByConfig(configCode, excludeConfigEnumCodes) {
       // 获取指定一级配置的配置结构列表(去除该一级配置下指定的二级配置，configCode详见本文件目录下open-config.md)
+      if (this.getState()[configCode] && !excludeConfigEnumCodes) {
+        return
+      }
       return api
         .get('/open-config/list-by-config', {
           params: {

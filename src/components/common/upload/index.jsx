@@ -35,7 +35,6 @@ export default class extends Component {
           this.hideTip()
         }
       }
-      console.log(info)
     }
 
     render() {

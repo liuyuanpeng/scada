@@ -27,7 +27,6 @@ class Main extends Component {
           <Content className={style.main}>
             <div className={style.body}>{this.props.children}</div>
           </Content>
-          <Footer />
         </Layout>
       </Layout>
     )
@@ -35,7 +34,6 @@ class Main extends Component {
 }
 
 export default smart(state => {
-  console.log('state: ', state)
   return {
     list: state.main.config
   }

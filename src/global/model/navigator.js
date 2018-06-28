@@ -11,7 +11,6 @@ ce.model({
     setMenu(data = {}) {
       const { keyPath, init } = data
       let pointer = getMenu()
-      console.log('menu: ', pointer)
       const arr = []
       let openKeys
       if (init) {

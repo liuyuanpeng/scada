@@ -81,4 +81,4 @@ router.register({
   examples: examplesRoutes
 })
 
-console.log(router.getFlat())
+// console.log(router.getFlat())

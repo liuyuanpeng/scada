@@ -385,6 +385,7 @@ const helper = {
       alias: {
         config: CONFIG,
         components: path.resolve(SRC, 'components'),
+        utils: path.resolve(SRC, 'utils'),
         styles: path.resolve(SRC, 'styles'),
         global: path.resolve(SRC, 'global'),
         fish: '@sdp.nd/fish'

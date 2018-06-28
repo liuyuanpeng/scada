@@ -60,7 +60,6 @@ ce.model({
           customError: true
         })
         .then(data => {
-          console.log('data: ', data)
           const { username, role } = data.data.user
           const { token, expires } = data.data.user_session
           localStorage.setItem('name', username)

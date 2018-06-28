@@ -41,7 +41,6 @@ class Admin extends Component {
   }
 
   getListData = () => {
-    console.log('this.props', this.props)
     if (this.props.list) {
       const list = this.props.list.map((item, index) => {
         return {
@@ -51,7 +50,6 @@ class Admin extends Component {
           user: item.user ? item.user.username : ''
         }
       })
-      console.log('list: ', list)
       return list
     }
     return []
@@ -134,7 +132,6 @@ class Admin extends Component {
 }
 
 export default smart(state => {
-  console.log('state: ', state)
   return {
     list: state.admin.data
   }

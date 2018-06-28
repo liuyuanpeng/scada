@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { smart, actions } from 'cat-eye'
 import Page from 'components/common/page'
-import { Form, Icon, Input, Button, Checkbox, Radio } from 'antd'
+import { Form, Input, Button, Checkbox, Radio, message } from 'antd'
+import createFormFields from 'utils/createFormFields'
+
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
+const CheckboxGroup = Checkbox.Group
 
 const COLLEGE_BELONGS = [
-  '中央部署高校',
+  '中央部属高校',
   '省属/市属院校',
   '(地级)市属院校',
   '企业部属院校'
@@ -20,21 +23,93 @@ const COLLEGE_NATURES = [
   '开放大学'
 ]
 
-const BasicForm = Form.create()(
+const BasicForm = Form.create({
+  mapPropsToFields(props) {
+    return {
+      ...createFormFields(props.data),
+      education_level: Form.createFormField({
+        value: props.data.education_level ? props.data.education_level.split('|') : []
+      }),
+      study_mode: Form.createFormField({
+        value: props.data.study_mode ? props.data.study_mode.split('|') : []
+      }),
+      has_continue_education_strategy_plan: Form.createFormField({
+        value: props.data.has_continue_education_strategy_plan ? 'yes' : 'no'
+      }),
+      is_continue_education_important_project: Form.createFormField({
+        value: props.data.is_continue_education_important_project ? 'yes' : 'no'
+      })
+    }
+  }
+})(
   class extends Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        disableOther: true
+      }
+    }
     componentWillMount() {
       actions.openConfig.getListByConfig('EDUCATION_LEVEL')
+      actions.openConfig.getListByConfig('STUDY_MODE')
       actions.schoolBasic.getByCollegeId()
+    }
+
+    handleSubmit = (e) => {
+      e.preventDefault()
+      this.props.form.validateFieldsAndScroll((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values)
+          actions.schoolBasic.saveCollege({
+            ...values,
+            id: this.props.data.id,
+            education_level: values.education_level.join('|'),
+            study_mode: values.study_mode.join('|'),
+            has_continue_education_strategy_plan: values.has_continue_education_strategy_plan === 'yes',
+            is_continue_education_important_project: values.is_continue_education_important_project === 'yes'
+          }).then(res => {
+            message.info('修改成功')
+          }).catch(e => {
+            message.info('修改失败!')
+          })
+        }
+      })
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (this.props.data.other !== nextProps.data.other) {
+        this.setState({
+          disableOther: false
+        })
+      }
+    }
+
+    onChange = (e) => {
+      this.setState({
+        disableOther: !e.target.checked
+      })
     }
     render() {
       const formItemLayout = {
-        labelCol: { span: 6 },
-        wrapperCol: { span: 14 }
+        labelCol: { span: 10 },
+        wrapperCol: { span: 10 }
+      }
+      const tailFormItemLayout = {
+        wrapperCol: {
+          xs: {
+            span: 24,
+            offset: 0
+          },
+          sm: {
+            span: 16,
+            offset: 8
+          }
+        }
       }
       const { getFieldDecorator } = this.props.form
       return (
         <Page>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormItem label="高校名称" {...formItemLayout}>
               {getFieldDecorator(
                 'name',
@@ -101,13 +176,49 @@ const BasicForm = Form.create()(
             </FormItem>
             <FormItem label="办学层次(可多选)" {...formItemLayout}>
               {getFieldDecorator('education_level')(
-                <RadioGroup>
-                  {COLLEGE_NATURES.map((item, index) => {
-                    return <Radio key={`education_level_${index}`} value={item}>{item}</Radio>
+                <CheckboxGroup>
+                  {this.props.educationLevel && this.props.educationLevel.map((item, index) => {
+                    return <Checkbox key={`education_level_${index}`} value={item.config_enum.name}>{item.config_enum.name}</Checkbox>
                   })}
+                </CheckboxGroup>
+              )
+              }
+              <Checkbox checked={!this.state.disableOther} onChange={this.onChange}>其他</Checkbox>
+              {getFieldDecorator('others')(
+                <Input disabled={this.state.disableOther} placeholder={this.state.disableOther ? '' : '请输入其他办学层次'} />
+              )
+              }
+            </FormItem>
+            <FormItem label="学习形式(可多选)" {...formItemLayout}>
+              {getFieldDecorator('study_mode')(
+                <CheckboxGroup>
+                  {this.props.studyMode && this.props.studyMode.map((item, index) => {
+                    return <Checkbox key={`study_mode_${index}`} value={item.config_enum.name}>{item.config_enum.name}</Checkbox>
+                  })}
+                </CheckboxGroup>
+              )
+              }
+            </FormItem>
+            <FormItem label="学校是否制定了专门的继续教育发展战略规划" {...formItemLayout}>
+              {getFieldDecorator('has_continue_education_strategy_plan', {initialValue: 'no'})(
+                <RadioGroup>
+                  <Radio value={'yes'}>是</Radio>
+                  <Radio value={'no'}>否</Radio>
                 </RadioGroup>
               )
               }
+            </FormItem>
+            <FormItem label="学校是否将继续教育纳入学校双一流建设或其他重点建设工程项目" {...formItemLayout}>
+              {getFieldDecorator('is_continue_education_important_project', {initialValue: 'no'})(
+                <RadioGroup>
+                  <Radio value={'yes'}>是</Radio>
+                  <Radio value={'no'}>否</Radio>
+                </RadioGroup>
+              )
+              }
+            </FormItem>
+            <FormItem {...tailFormItemLayout}>
+              <Button type="primary" htmlType="submit">保存</Button>
             </FormItem>
           </Form>
         </Page>
@@ -116,8 +227,9 @@ const BasicForm = Form.create()(
   }
 )
 export default smart(state => {
-  console.log('state: ', state)
   return {
-    config: state.main.config
+    data: state.schoolBasic.data,
+    educationLevel: state.openConfig.EDUCATION_LEVEL,
+    studyMode: state.openConfig.STUDY_MODE
   }
 })(BasicForm)

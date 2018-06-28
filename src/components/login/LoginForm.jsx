@@ -56,7 +56,6 @@ export default smart(
             password
           })
           .then(data => {
-            console.log('call then data: ', data)
             actions.login.setField({
               error: false
             })
@@ -67,7 +66,6 @@ export default smart(
             }
           })
           .catch(data => {
-            console.log('error%%%%%%%')
             actions.login.setField({
               error: true
             })
