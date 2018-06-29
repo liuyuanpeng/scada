@@ -8,11 +8,6 @@ ce.model({
   },
   reducers: {},
   effects: {
-  		/**
-     * 导入在学学生来源统计一览表
-     * /student/import
-     */
-    /**=====================================*/
     getStudentSexAgeJobList({currentYear, studyMode}) {
       return api
         .get('/student/list-sex-age-job', {
@@ -51,7 +46,7 @@ ce.model({
           })
         })
     },
-    saveStudent(student) {
+    save(student) {
       return api
         .post('/student/save', {
           data: student,

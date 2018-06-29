@@ -8,11 +8,6 @@ ce.model({
   },
   reducers: {},
   effects: {
-  		/**
-     * 导入学历继续教育办学情况总体规模一览表
-     * /organization-scale/import
-     */
-    /**=====================================*/
     getList({currentYear, educationCategory}) {
       return api
         .get('/organization-scale/list', {
@@ -32,7 +27,7 @@ ce.model({
           })
         })
     },
-    saveOrganizationScale(organizationScale) {
+    save(organizationScale) {
       return api
         .post('/organization-scale/save', {
           data: organizationScale,
@@ -60,9 +55,9 @@ ce.model({
           })
         })
     },
-    deleteByOrganizationScaleId(organizationScaleId) {
+    deleteById(id) {
       return api
-        .delete('/organization-scale/' + organizationScaleId, {
+        .delete('/organization-scale/' + id, {
           complete: () => {
             this.setField({
               loading: false
@@ -71,7 +66,7 @@ ce.model({
         })
         .then(res => {
           let data = this.getState().data.concat()
-          const dataIndex = data.findIndex(item => item.id === organizationScaleId)
+          const dataIndex = data.findIndex(item => item.id === id)
           data.splice(dataIndex, 1)
           this.setField({
             data
