@@ -11,9 +11,6 @@ ce.model({
     getData() {
       return api
         .get('/college/list', {
-          params: {
-            'user-role': localStorage.getItem('role')
-          },
           complete: () => {
             this.setField({ loading: false })
           }

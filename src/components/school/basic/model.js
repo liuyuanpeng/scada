@@ -12,26 +12,6 @@ ce.model({
   },
   reducers: {},
   effects: {
-    importExcelData(formData) {
-      // 导入学校基本信息excel表格
-      return api
-        .post('/college/import', {
-          headers: {
-            'Content-Type': 'multipart/form-data' // 设置post文件的请求头
-          },
-          data: formData,
-          complete: () => {
-            this.setField({
-              loading: false
-            })
-          }
-        })
-        .then(res => {
-          this.setField({
-            data: res ? res.data : []
-          })
-        })
-    },
     getList() {
       // 获取学校基本信息列表
       return api
