@@ -55,11 +55,11 @@ class Rewards extends Component {
           return <div>
             <a
               href="javascript:;"
-              onClick={() => this.onDelete(record)}
+              onClick={() => this.onModify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
             <Popconfirm title="确定要删除?"
-              onConfirm={() => { this.onModify(record) }} >
+              onConfirm={() => { this.onDelete(record) }} >
               <a href="#">删除</a>
             </Popconfirm>
           </div>

@@ -112,7 +112,7 @@ router.register({
         component: InsideQuality
       },
       outsideQuality: {
-        path: 'outsideQuality',
+        path: '/outsideQuality',
         component: OutsideQuality
       },
       studyEffect: {
