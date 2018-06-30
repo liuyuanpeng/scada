@@ -46,7 +46,7 @@ export default Form.create({
               {getFieldDecorator('enroll_student')(
                 <CheckboxGroup>
                   {this.props.enrollStudent && this.props.enrollStudent.map((item, index) => {
-                    return <Checkbox key={`${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`${index}`} value={item.code}>{item.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )}
@@ -60,7 +60,7 @@ export default Form.create({
               {getFieldDecorator('education_mode')(
                 <CheckboxGroup>
                   {this.props.educationMode && this.props.educationMode.map((item, index) => {
-                    return <Checkbox key={`${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`${index}`} value={item.code}>{item.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )}

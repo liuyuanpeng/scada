@@ -14,8 +14,8 @@ class InformEducation extends Component {
     }
   }
   componentWillMount() {
-  		actions.openConfig.getListByConfig({code: 'ENROLL_STUDENT'})
-  		actions.openConfig.getListByConfig({code: 'EDUCATION_MODE'})
+    actions.openConfig.getListByConfig({code: 'ENROLL_STUDENT'})
+    actions.openConfig.getListByConfig({code: 'EDUCATION_MODE'})
     actions.informEducation.getList(null)
   }
 
@@ -36,17 +36,17 @@ class InformEducation extends Component {
       }, {
         title: '招生方式',
         dataIndex: 'enroll_student',
-        key: 'enroll_student',
-//      render: (text, record) => {
-//        const modes = text.split('|')
-//        const modeNames = this.props.enrollStudent && modes.map(code => {
-//          const rt = this.props.enrollStudent.find((item) => {
-//            return item.config_enum.code === code
-//          })
-//          return rt.config_enum.name
-//        })
-//        return modeNames ? modeNames.join('、') : ''
-//      }
+        key: 'enroll_student'
+        //      render: (text, record) => {
+        //        const modes = text.split('|')
+        //        const modeNames = this.props.enrollStudent && modes.map(code => {
+        //          const rt = this.props.enrollStudent.find((item) => {
+        //            return item.config_enum.code === code
+        //          })
+        //          return rt.config_enum.name
+        //        })
+        //        return modeNames ? modeNames.join('、') : ''
+        //      }
       }, {
         title: '面向人群',
         dataIndex: 'toward_crowd',
@@ -54,17 +54,17 @@ class InformEducation extends Component {
       }, {
         title: '教学模式',
         dataIndex: 'education_mode',
-        key: 'education_mode',
-//      render: (text, record) => {
-//        const modes = text.split('|')
-//        const modeNames = this.props.educationMode && modes.map(code => {
-//          const rt = this.props.educationMode.find((item) => {
-//            return item.config_enum.code === code
-//          })
-//          return rt.config_enum.name
-//        })
-//        return modeNames ? modeNames.join('、') : ''
-//      }
+        key: 'education_mode'
+        //      render: (text, record) => {
+        //        const modes = text.split('|')
+        //        const modeNames = this.props.educationMode && modes.map(code => {
+        //          const rt = this.props.educationMode.find((item) => {
+        //            return item.config_enum.code === code
+        //          })
+        //          return rt.config_enum.name
+        //        })
+        //        return modeNames ? modeNames.join('、') : ''
+        //      }
       }, {
         title: '年度总班次',
         dataIndex: 'total_class_number',
