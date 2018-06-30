@@ -4,17 +4,17 @@ const { api } = request
 ce.model({
   name: 'summaryGenderAge', // 学生来源统计 - 性别年龄职业统计
   state: {
-  		data: {}
+    data: {}
   },
   reducers: {},
   effects: {
     getStudentSexAgeJobList({currentYear, studyMode}) {
       return api
         .get('/student/list-sex-age-job', {
-        		params: {
-        			'current-year': currentYear,	// 当前年份，不可为null
-        			'study-mode': studyMode		// STUDY_MODE(学习形式)对应二级code，不可为null
-        		},
+          params: {
+            'current-year': currentYear, // 当前年份，不可为null
+            'study-mode': studyMode // STUDY_MODE(学习形式)对应二级code，不可为null
+          },
           complete: () => {
             this.setField({
               loading: false
@@ -30,10 +30,10 @@ ce.model({
     getStudentMajorHujiList({currentYear, studyMode}) {
       return api
         .get('/student/list-major-huji', {
-        		params: {
-        			'current-year': currentYear,	// 当前年份，不可为null
-        			'study-mode': studyMode		// STUDY_MODE(学习形式)对应二级code，不可为null
-        		},
+          params: {
+            'current-year': currentYear, // 当前年份，不可为null
+            'study-mode': studyMode // STUDY_MODE(学习形式)对应二级code，不可为null
+          },
           complete: () => {
             this.setField({
               loading: false
@@ -67,12 +67,12 @@ ce.model({
               }
             }
           } else {
-          		data[student.config_enum_code].push(res.data)
+            data[student.config_enum_code].push(res.data)
           }
           this.setField({
             data
           })
         })
-    },
+    }
   }
 })

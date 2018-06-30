@@ -7,10 +7,19 @@ const {
   api
 } = request
 
+const curYear = moment().year()
+const startYear = 2015
+let years = []
+for (let i = curYear; i >= startYear; i--) {
+  years.push(`${i}`)
+}
+console.log(years)
+
 ce.model({
   name: 'page',
   state: {
-    year: moment().year(),
+    year: `${curYear}`,
+    years,
     types: {},
     type: ''
   },
@@ -29,6 +38,11 @@ ce.model({
   effects: {
     getTypes(type, allState) {
       if (this.getState().types && this.getState().types.hasOwnProperty(type)) {
+        if (!this.getState().type) {
+          this.setField({
+            type: this.getState().types[type][0].code
+          })
+        }
         return
       }
       if (allState().openConifg && allState().openConifg.hasOwnProperty(type)) {

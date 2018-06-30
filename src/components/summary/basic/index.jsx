@@ -14,6 +14,10 @@ class Rules extends Component {
     }
   }
   componentWillMount() {
+    actions.openConfig.getListByConfig({code: 'EXAM_ENTRANCE'})
+    actions.openConfig.getListByConfig({code: 'EDUCATION_CATEGORY'})
+    actions.openConfig.getListByConfig({code: 'EDUCATION_LEVEL'})
+    actions.openConfig.getListByConfig({code: 'STUDY_MODE'})
     this.updateList(this.props.year, this.props.category)
   }
 
@@ -35,40 +39,79 @@ class Rules extends Component {
       {
         title: '类型',
         dataIndex: 'study_mode',
-        key: 'study_mode'
+        key: 'study_mode',
+        render: (text, record) => {
+          if (!text) {
+            return null
+          }
+          const modes = text.split('|')
+          const modeNames = this.props.studyMode && modes.map(code => {
+            const rt = this.props.studyMode.find((item) => {
+              return item.code === code
+            })
+            return rt.name
+          })
+          return modeNames ? modeNames.join('、') : ''
+        }
       },
       {
         title: '培养层次',
         dataIndex: 'education_level',
-        key: 'education_level'
+        key: 'education_level',
+        render: (text, record) => {
+          if (!text) {
+            return null
+          }
+          const modes = text.split('|')
+          const modeNames = this.props.educationLevel && modes.map(code => {
+            const rt = this.props.educationLevel.find((item) => {
+              return item.code === code
+            })
+            return rt.name
+          })
+          return modeNames ? modeNames.join('、') : ''
+        }
       }, {
         title: '专业代码',
-        dataIndex: 'make_time',
-        key: 'make_time'
+        dataIndex: 'subject_code',
+        key: 'subject_code'
       }, {
         title: '专业名称',
-        dataIndex: 'reference_number',
-        key: 'reference_number'
+        dataIndex: 'subject_name',
+        key: 'subject_name'
       }, {
         title: '专业方向',
-        dataIndex: 'draft_name',
-        key: 'draft_name'
+        dataIndex: 'subject_direction',
+        key: 'subject_direction'
       }, {
         title: '招考方式',
-        dataIndex: 'draft_name',
-        key: 'draft_name'
+        dataIndex: 'exam_entrance',
+        key: 'exam_entrance',
+        render: (text, record) => {
+          if (!text) {
+            return null
+          }
+          const modes = text.split('|')
+          const modeNames = this.props.examEntrance && modes.map(code => {
+            const rt = this.props.examEntrance.find((item) => {
+              return item.code === code
+            })
+            return rt.name
+          })
+          return modeNames ? modeNames.join('、') : ''
+        }
       }, {
         title: '专业年度招生人数',
-        dataIndex: 'draft_name',
-        key: 'draft_name'
+        dataIndex: 'enroll_number',
+        key: 'enroll_number'
       }, {
         title: '在学人数',
-        dataIndex: 'draft_name',
-        key: 'draft_name'
+        dataIndex: 'study_number',
+        key: 'study_number'
       }, {
         title: '当年毕业生人数',
-        dataIndex: 'draft_name',
-        key: 'draft_name'
+        dataIndex: 'graduate_number',
+        key: 'graduate_number'
       }, {
         title: '操作',
         dataIndex: 'operation',
@@ -77,11 +120,11 @@ class Rules extends Component {
           return <div>
             <a
               href="javascript:;"
-              onClick={() => this.modify(record)}
+              onClick={() => this.onModify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
             <Popconfirm title="确定要删除?"
-              onConfirm={() => { this.delete(record) }} >
+              onConfirm={() => { this.onDelete(record) }} >
               <a href="#">删除</a>
             </Popconfirm>
           </div>
@@ -98,7 +141,7 @@ class Rules extends Component {
     }
   }
 
-  modify = (record) => {
+  onModify = (record) => {
     this.setState({
       type: 'edit',
       visible: true,
@@ -106,8 +149,8 @@ class Rules extends Component {
     })
   }
 
-  delete = (record) => {
-    actions.schoolRules.deleteByRegulationId(record.id)
+  onDelete = (record) => {
+    actions.summaryBasic.deleteById(record.id)
       .then(res => {
         message.info('删除成功!')
       })
@@ -135,9 +178,12 @@ class Rules extends Component {
         return
       }
 
-      actions.schoolRules.saveRegulation({
+      actions.summaryBasic.save({
         ...this.state.formData,
-        ...values
+        ...values,
+        study_mode: values.study_mode.join('|'),
+        education_level: values.education_level.join('|'),
+        exam_entrance: values.exam_entrance.join('|')
       })
         .then(res => {
           message.info('操作成功!')
@@ -161,24 +207,28 @@ class Rules extends Component {
   }
 
   render() {
-    return null
-    // return (
-    //   <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY">
-    //     <Button type="primary" onClick={this.onAdd}>新增</Button>
-    //     <Table
-    //       columns={this.columns()}
-    //       dataSource={this.data()}
-    //       pagination={false}
-    //     />
-    //     <BasicForm
-    //       wrappedComponentRef={this.saveFormRef}
-    //       data={this.state.formData}
-    //       type={this.state.type}
-    //       onOK={this.onOK}
-    //       onCancel={this.onCancel}
-    //       visible={this.state.visible} />
-    //   </Page>
-    // )
+    return (
+      <Page importUri={'/organization-scale/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY">
+        <Button type="primary" onClick={this.onAdd}>新增</Button>
+        <Table
+          columns={this.columns()}
+          dataSource={this.data()}
+          pagination={false}
+        />
+        <BasicForm
+          wrappedComponentRef={this.saveFormRef}
+          educationCategory={this.props.educationCategory}
+          educationLevel={this.props.educationLevel}
+          studyMode={this.props.studyMode}
+          examEntrance={this.props.examEntrance}
+          years={this.props.years}
+          data={this.state.formData}
+          type={this.state.type}
+          onOK={this.onOK}
+          onCancel={this.onCancel}
+          visible={this.state.visible} />
+      </Page>
+    )
   }
 }
 
@@ -186,6 +236,11 @@ export default smart(state => {
   return {
     data: state.summaryBasic.data,
     year: state.page.year,
-    category: state.page.type
+    years: state.page.years,
+    category: state.page.type,
+    educationLevel: state.openConfig.EDUCATION_LEVEL,
+    studyMode: state.openConfig.STUDY_MODE,
+    examEntrance: state.openConfig.EXAM_ENTRANCE,
+    educationCategory: state.openConfig.EDUCATION_CATEGORY
   }
 })(Rules)
