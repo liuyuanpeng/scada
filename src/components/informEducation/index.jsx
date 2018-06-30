@@ -39,11 +39,8 @@ class InformEducation extends Component {
         key: 'enroll_student',
 //      render: (text, record) => {
 //        const modes = text.split('|')
-//        console.error(modes)
-//        console.error(this.props.enrollStudent)
 //        const modeNames = this.props.enrollStudent && modes.map(code => {
 //          const rt = this.props.enrollStudent.find((item) => {
-//          		console.error(item)
 //            return item.config_enum.code === code
 //          })
 //          return rt.config_enum.name

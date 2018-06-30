@@ -15,7 +15,7 @@ export default Form.create({
       }),
       education_mode: createFormField({
         value: props.data.education_mode && props.data.education_mode.split('|')
-      }),
+      })
     }
   }
 })(
@@ -44,7 +44,11 @@ export default Form.create({
             </FormItem>
             <FormItem label="招生方式">
               {getFieldDecorator('enroll_student')(
-                <Input placeholder="请输入招生方式" />
+                <CheckboxGroup>
+                  {this.props.enrollStudent && this.props.enrollStudent.map((item, index) => {
+                    return <Checkbox key={`${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                  })}
+                </CheckboxGroup>
               )}
             </FormItem>
             <FormItem label="面向人群">
@@ -54,7 +58,11 @@ export default Form.create({
             </FormItem>
             <FormItem label="教学模式">
               {getFieldDecorator('education_mode')(
-                <Input placeholder="请输入教学模式" />
+                <CheckboxGroup>
+                  {this.props.educationMode && this.props.educationMode.map((item, index) => {
+                    return <Checkbox key={`${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                  })}
+                </CheckboxGroup>
               )}
             </FormItem>
             <FormItem label="年度总班次">
