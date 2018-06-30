@@ -14,8 +14,17 @@ class InsideQuality extends Component {
     }
   }
   componentWillMount() {
-    actions.openConfig.getListByConfig({code: 'STUDY_MODE'})
-    actions.insideQuality.getList('2017')
+    this.updateList(this.props.year)
+  }
+  
+  updateList(year) {
+    year && actions.insideQuality.getList(year)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year) {
+      this.updateList(nextProps.year)
+    }
   }
 
   columns = () => {
@@ -139,10 +148,14 @@ class InsideQuality extends Component {
       visible: false
     })
   }
+  
+  onUploadOK = () => {
+    this.updateList(this.props.year)
+  }
 
   render() {
     return (
-      <div>
+      <Page showYear>
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered
@@ -152,18 +165,21 @@ class InsideQuality extends Component {
         />
         <InsideQualityForm
           wrappedComponentRef={this.saveFormRef}
+          years={this.props.years}
           data={this.state.formData}
           type={this.state.type}
           onOK={this.onOK}
           onCancel={this.onCancel}
           visible={this.state.visible} />
-      </div>
+      </Page>
     )
   }
 }
 
 export default smart(state => {
   return {
-    data: state.insideQuality.data
+    data: state.insideQuality.data,
+    year: state.page.year,
+    years: state.page.years
   }
 })(InsideQuality)

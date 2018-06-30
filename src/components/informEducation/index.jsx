@@ -16,7 +16,17 @@ class InformEducation extends Component {
   componentWillMount() {
     actions.openConfig.getListByConfig({code: 'ENROLL_STUDENT'})
     actions.openConfig.getListByConfig({code: 'EDUCATION_MODE'})
-    actions.informEducation.getList(null)
+    this.updateList(this.props.year)
+  }
+  
+  updateList(year) {
+    year && actions.informEducation.getList(year)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year) {
+      this.updateList(nextProps.year)
+    }
   }
 
   columns = () => {
@@ -167,12 +177,12 @@ class InformEducation extends Component {
   }
 
   onUploadOK = () => {
-    actions.informEducation.getList(null)
+    this.updateList(this.props.year)
   }
 
   render() {
     return (
-      <Page importUri={'/non-degree-continue-education-status/import'} onSuccess={this.onUploadOK}>
+      <Page importUri={'/non-degree-continue-education-status/import'} onSuccess={this.onUploadOK} showYear>
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered
@@ -182,6 +192,7 @@ class InformEducation extends Component {
         />
         <InformEducationForm
           wrappedComponentRef={this.saveFormRef}
+          years={this.props.years}
           data={this.state.formData}
           enrollStudent={this.props.enrollStudent}
           educationMode={this.props.educationMode}
@@ -197,6 +208,8 @@ class InformEducation extends Component {
 export default smart(state => {
   return {
     data: state.informEducation.data,
+    year: state.page.year,
+    years: state.page.years,
     enrollStudent: state.openConfig.ENROLL_STUDENT,
     educationMode: state.openConfig.EDUCATION_MODE
   }

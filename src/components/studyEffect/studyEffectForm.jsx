@@ -1,10 +1,12 @@
 import React from 'react'
-import { Modal, Form, Input, Checkbox, Radio } from 'antd'
+import { Modal, Form, Input, Checkbox, Radio, Select } from 'antd'
 import createFormFields from 'utils/createFormFields'
+import moment from 'moment'
 const FormItem = Form.Item
 const CheckboxGroup = Checkbox.Group
 const RadioGroup = Radio.Group
 const createFormField = Form.createFormField
+const Option = Select.Option
 
 export default Form.create({
   mapPropsToFields(props) {
@@ -38,6 +40,17 @@ export default Form.create({
           onCancel={onCancel}
         >
           <Form layout="vertical">
+            <FormItem label="年份">
+              {getFieldDecorator('current_year', {initialValue: `${moment().year()}`})(
+                <Select>
+                  {
+                    this.props.years && this.props.years.map((item, index) => {
+                      return <Option key={`${index}`} value={item}>{`${item} 年`}</Option>
+                    })
+                  }
+                </Select>
+              )}
+            </FormItem>
             <FormItem label="是否开展学生满意度调查">
               {getFieldDecorator('has_student_satisfaction_survey')(
                 <RadioGroup>
@@ -68,16 +81,6 @@ export default Form.create({
                   <Radio value={'yes'}>定期</Radio>
                   <Radio value={'no'}>不定期</Radio>
                 </RadioGroup>
-              )}
-            </FormItem>
-            <FormItem label="记录时间">
-              {getFieldDecorator('current_year', {
-                rules: [
-                  {
-                    required: true, message: '请输入记录时间'
-                  }]
-              })(
-                <Input placeholder="请输入记录时间" />
               )}
             </FormItem>
           </Form>
