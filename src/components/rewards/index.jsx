@@ -13,8 +13,19 @@ class Rewards extends Component {
       formData: {}
     }
   }
+  
   componentWillMount() {
-    actions.rewards.getList(null)
+    this.updateList(this.props.year)
+  }
+  
+  updateList(year) {
+    year && actions.rewards.getList(year)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year) {
+      this.updateList(nextProps.year)
+    }
   }
 
   columns = () => {
@@ -135,12 +146,12 @@ class Rewards extends Component {
   }
 
   onUploadOK = () => {
-    actions.rewards.getList(null)
+    this.updateList(this.props.year)
   }
 
   render() {
     return (
-      <Page importUri={'/college-continue-education-status/import'} onSuccess={this.onUploadOK}>
+      <Page importUri={'/college-continue-education-status/import'} onSuccess={this.onUploadOK} showYear >
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
@@ -149,6 +160,7 @@ class Rewards extends Component {
         />
         <RewardForm
           wrappedComponentRef={this.saveFormRef}
+          years={this.props.years}
           data={this.state.formData}
           type={this.state.type}
           onOK={this.onOK}
@@ -161,6 +173,8 @@ class Rewards extends Component {
 
 export default smart(state => {
   return {
-    data: state.rewards.data
+    data: state.rewards.data,
+    year: state.page.year,
+    years: state.page.years
   }
 })(Rewards)

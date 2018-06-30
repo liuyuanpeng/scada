@@ -14,7 +14,17 @@ class StudyEffect extends Component {
     }
   }
   componentWillMount() {
-    actions.studyEffect.getList('2017')
+    this.updateList(this.props.year)
+  }
+  
+  updateList(year) {
+    year && actions.studyEffect.getList(year)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year) {
+      this.updateList(nextProps.year)
+    }
   }
 
   columns = () => {
@@ -152,7 +162,7 @@ class StudyEffect extends Component {
 
   render() {
     return (
-      <div>
+      <Page showYear>
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
@@ -161,18 +171,21 @@ class StudyEffect extends Component {
         />
         <StudyEffectForm
           wrappedComponentRef={this.saveFormRef}
+          years={this.props.years}
           data={this.state.formData}
           type={this.state.type}
           onOK={this.onOK}
           onCancel={this.onCancel}
           visible={this.state.visible} />
-      </div>
+      </Page>
     )
   }
 }
 
 export default smart(state => {
   return {
-    data: state.studyEffect.data
+    data: state.studyEffect.data,
+    year: state.page.year,
+    years: state.page.years
   }
 })(StudyEffect)

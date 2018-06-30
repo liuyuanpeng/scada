@@ -11,13 +11,7 @@ const Option = Select.Option
 export default Form.create({
   mapPropsToFields(props) {
     return {
-      ...createFormFields(props.data),
-      has_guarantee_dept: createFormField({
-        value: props.data.has_guarantee_dept ? 'yes' : 'no'
-      }),
-      has_guarantee_regulation: createFormField({
-        value: props.data.has_guarantee_regulation ? 'yes' : 'no'
-      })
+      ...createFormFields(props.data)
     }
   }
 })(
@@ -45,23 +39,34 @@ export default Form.create({
                 </Select>
               )}
             </FormItem>
-            <FormItem label="是否建立内部质量保证部门">
-              {getFieldDecorator('has_guarantee_dept')(
-                <RadioGroup>
-                  <Radio value={'yes'}>是</Radio>
-                  <Radio value={'no'}>否</Radio>
-                </RadioGroup>
-              )}
-              {getFieldDecorator('dept_name')(
-                <Input disabled={form.getFieldValue('has_guarantee_dept') === 'no'} placeholder="请输入部门名称" />
+            <FormItem label="教学人员(万元)">
+              {getFieldDecorator('teacher_salary')(
+                <Input placeholder="请输入教学人员(万元)" />
               )}
             </FormItem>
-            <FormItem label="是否建立内部质量管理制度">
-              {getFieldDecorator('has_guarantee_regulation')(
-                <RadioGroup>
-                  <Radio value={'yes'}>是</Radio>
-                  <Radio value={'no'}>否</Radio>
-                </RadioGroup>
+            <FormItem label="管理人员(万元)">
+              {getFieldDecorator('manager_salary')(
+                <Input placeholder="请输入管理人员(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="资源建设(万元)">
+              {getFieldDecorator('resource_build_pay')(
+                <Input placeholder="请输入资源建设(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="平台系统(万元)">
+              {getFieldDecorator('platform_build_pay')(
+                <Input placeholder="请输入平台系统(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="基础设施(万元)">
+              {getFieldDecorator('base_build_pay')(
+                <Input placeholder="请输入基础设施(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="年总支出(万元)">
+              {getFieldDecorator('total_payout')(
+                <Input placeholder="请输入年总支出(万元)" />
               )}
             </FormItem>
           </Form>

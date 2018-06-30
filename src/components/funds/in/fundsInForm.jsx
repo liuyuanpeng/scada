@@ -11,13 +11,7 @@ const Option = Select.Option
 export default Form.create({
   mapPropsToFields(props) {
     return {
-      ...createFormFields(props.data),
-      has_guarantee_dept: createFormField({
-        value: props.data.has_guarantee_dept ? 'yes' : 'no'
-      }),
-      has_guarantee_regulation: createFormField({
-        value: props.data.has_guarantee_regulation ? 'yes' : 'no'
-      })
+      ...createFormFields(props.data)
     }
   }
 })(
@@ -45,23 +39,24 @@ export default Form.create({
                 </Select>
               )}
             </FormItem>
-            <FormItem label="是否建立内部质量保证部门">
-              {getFieldDecorator('has_guarantee_dept')(
-                <RadioGroup>
-                  <Radio value={'yes'}>是</Radio>
-                  <Radio value={'no'}>否</Radio>
-                </RadioGroup>
-              )}
-              {getFieldDecorator('dept_name')(
-                <Input disabled={form.getFieldValue('has_guarantee_dept') === 'no'} placeholder="请输入部门名称" />
+            <FormItem label="年学费收入(万元)">
+              {getFieldDecorator('tuition_income')(
+                <Input placeholder="请输入年学费收入(万元)" />
               )}
             </FormItem>
-            <FormItem label="是否建立内部质量管理制度">
-              {getFieldDecorator('has_guarantee_regulation')(
-                <RadioGroup>
-                  <Radio value={'yes'}>是</Radio>
-                  <Radio value={'no'}>否</Radio>
-                </RadioGroup>
+            <FormItem label="其他收入(万元)">
+              {getFieldDecorator('other_income')(
+                <Input placeholder="请输入其他收入(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="学费上缴学校金额(万元)">
+              {getFieldDecorator('tuition_handed')(
+                <Input placeholder="请输入学费上缴学校金额(万元)" />
+              )}
+            </FormItem>
+            <FormItem label="合作方分成金额(万元)">
+              {getFieldDecorator('cooperator_obtain')(
+                <Input placeholder="请输入合作方分成金额(万元)" />
               )}
             </FormItem>
           </Form>

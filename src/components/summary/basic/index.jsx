@@ -203,7 +203,7 @@ class Rules extends Component {
   }
 
   onUploadOK = () => {
-    actions.schoolRules.getList()
+    this.updateList(this.props.year, this.props.category)
   }
 
   render() {

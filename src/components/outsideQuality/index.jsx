@@ -15,7 +15,17 @@ class OutsideQuality extends Component {
   }
   componentWillMount() {
     actions.openConfig.getListByConfig({code: 'QUALITY_EVALUATE'})
-    actions.outsideQuality.getList('2017')
+    this.updateList(this.props.year)
+  }
+  
+  updateList(year) {
+    year && actions.outsideQuality.getList(year)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year) {
+      this.updateList(nextProps.year)
+    }
   }
 
   columns = () => {
@@ -143,12 +153,12 @@ class OutsideQuality extends Component {
   }
 
   onUploadOK = () => {
-    actions.outsideQuality.getList('2017')
+    this.updateList(this.props.year)
   }
 
   render() {
     return (
-      <div>
+      <Page showYear>
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
@@ -157,13 +167,14 @@ class OutsideQuality extends Component {
         />
         <OutsideQualityForm
           wrappedComponentRef={this.saveFormRef}
+          years={this.props.years}
           data={this.state.formData}
           qualityEvaluate={this.props.qualityEvaluate}
           type={this.state.type}
           onOK={this.onOK}
           onCancel={this.onCancel}
           visible={this.state.visible} />
-      </div>
+      </Page>
     )
   }
 }
@@ -171,6 +182,8 @@ class OutsideQuality extends Component {
 export default smart(state => {
   return {
     data: state.outsideQuality.data,
+    year: state.page.year,
+    years: state.page.years,
     qualityEvaluate: state.openConfig.QUALITY_EVALUATE,
   }
 })(OutsideQuality)
