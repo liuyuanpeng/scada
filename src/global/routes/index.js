@@ -16,6 +16,17 @@ import schoolRoutes from './school'
 import informEducation from './informEducation'
 import rewardsRoutes from './rewards'
 import summaryRoutes from './summary'
+import professionRoutes from './profession'
+import teachRoutes from './teach'
+import supportRoutes from './support'
+import fundsRoutes from './funds'
+
+import Compare from 'components/compare'
+import Structure from 'components/structure'
+import Informational from 'components/informational'
+import InsideQuality from 'components/insideQuality'
+import OutsideQuality from 'components/outsideQuality'
+import StudyEffect from 'components/studyEffect'
 
 import Admin from 'components/admin'
 
@@ -80,6 +91,34 @@ router.register({
       },
       summary: summaryRoutes,
       school: schoolRoutes,
+      compare: {
+        path: '/compare',
+        component: Compare
+      },
+      profession: professionRoutes,
+      structure: {
+        path: '/structure',
+        component: Structure
+      },
+      teach: teachRoutes,
+      support: supportRoutes,
+      informational: {
+        path: '/informational',
+        component: Informational
+      },
+      funds: fundsRoutes,
+      insideQuality: {
+        path: '/insideQuality',
+        component: InsideQuality
+      },
+      outsideQuality: {
+        path: 'outsideQuality',
+        component: OutsideQuality
+      },
+      studyEffect: {
+        path: '/studyEffect',
+        component: StudyEffect
+      },
       informEducation: informEducation,
       rewards: rewardsRoutes
     }
