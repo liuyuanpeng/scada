@@ -4,22 +4,22 @@ const { api } = request
 ce.model({
   name: 'structure', // 教师构成
   state: {
-  		data: {}
+    data: {}
   },
   reducers: {},
   effects: {
-  		/**
+    /**
      * 导入教师构成统计一览表
      * /teacher/import
      */
-    /**=====================================*/
+    /** ===================================== */
     getTeacherList({currentYear, studyMode}) {
       return api
         .get('/teacher/list', {
-        		params: {
-        			'current-year': currentYear,	// 当前年份，不可为null
-        			'study-mode': studyMode		// STUDY_MODE(学习形式)对应二级code，不可为null
-        		},
+          params: {
+            'current-year': currentYear, // 当前年份，不可为null
+            'study-mode': studyMode // STUDY_MODE(学习形式)对应二级code，不可为null
+          },
           complete: () => {
             this.setField({
               loading: false
@@ -43,22 +43,12 @@ ce.model({
           }
         })
         .then(res => {
-          let data = this.getState().data.concat()
-          if (teacher.id) {
-            // 修改
-            for (let i = 0; i < datadata[teacher.config_enum_code].length; i++) {
-              if (datadata[teacher.config_enum_code][i].id === teacher.id) {
-                data[teacher.config_enum_code][i] = res.data
-                break
-              }
-            }
-          } else {
-          		data[teacher.config_enum_code].push(res.data)
-          }
+          let data = {...this.getState().data}
+          data[teacher.config_enum_value_code] = res.data
           this.setField({
             data
           })
         })
-    },
+    }
   }
 })

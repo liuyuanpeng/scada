@@ -105,7 +105,7 @@ class GenderAgeJob extends Component {
           key: 'name',
           render: (text, record, index) => {
             const obj = {
-              children: record.code_one.name,
+              children: <span className={styles['header-style']}>{record.code_one.name}</span>,
               props: {}
             }
             if (index === 0) {
@@ -128,7 +128,7 @@ class GenderAgeJob extends Component {
           dataIndex: 'code_two',
           key: 'code_two',
           render: (text, record) => {
-            return record.code_two.name
+            return <span className={styles['header-style']}>{record.code_two.name}</span>
           }
         }, {
           title: '值',
