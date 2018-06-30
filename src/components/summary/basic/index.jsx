@@ -14,20 +14,33 @@ class Rules extends Component {
     }
   }
   componentWillMount() {
-    actions.schoolRules.getList()
+    this.updateList(this.props.year, this.props.category)
+  }
+
+  updateList(year, category) {
+    year && category && actions.summaryBasic.getList({
+      currentYear: year,
+      educationCategory: category
+    })
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.year !== nextProps.year || this.props.category !== nextProps.category) {
+      this.updateList(nextProps.year, nextProps.category)
+    }
   }
 
   columns = () => {
     return [
       {
         title: '类型',
-        dataIndex: 'type',
-        key: 'type'
+        dataIndex: 'study_mode',
+        key: 'study_mode'
       },
       {
         title: '培养层次',
-        dataIndex: 'name',
-        key: 'name'
+        dataIndex: 'education_level',
+        key: 'education_level'
       }, {
         title: '专业代码',
         dataIndex: 'make_time',
@@ -148,28 +161,31 @@ class Rules extends Component {
   }
 
   render() {
-    return (
-      <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK}>
-        <Button type="primary" onClick={this.onAdd}>新增</Button>
-        <Table
-          columns={this.columns()}
-          dataSource={this.data()}
-          pagination={false}
-        />
-        <BasicForm
-          wrappedComponentRef={this.saveFormRef}
-          data={this.state.formData}
-          type={this.state.type}
-          onOK={this.onOK}
-          onCancel={this.onCancel}
-          visible={this.state.visible} />
-      </Page>
-    )
+    return null
+    // return (
+    //   <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY">
+    //     <Button type="primary" onClick={this.onAdd}>新增</Button>
+    //     <Table
+    //       columns={this.columns()}
+    //       dataSource={this.data()}
+    //       pagination={false}
+    //     />
+    //     <BasicForm
+    //       wrappedComponentRef={this.saveFormRef}
+    //       data={this.state.formData}
+    //       type={this.state.type}
+    //       onOK={this.onOK}
+    //       onCancel={this.onCancel}
+    //       visible={this.state.visible} />
+    //   </Page>
+    // )
   }
 }
 
 export default smart(state => {
   return {
-    data: state.schoolRules.data
+    data: state.summaryBasic.data,
+    year: state.page.year,
+    category: state.page.type
   }
 })(Rules)

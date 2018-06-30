@@ -4,17 +4,17 @@ const { api } = request
 ce.model({
   name: 'summaryBasic', // 办学情况 - 总体规模
   state: {
-  		data: []
+    data: []
   },
   reducers: {},
   effects: {
     getList({currentYear, educationCategory}) {
       return api
         .get('/organization-scale/list', {
-        		params: {
-        			'current-year': currentYear,	// 当前年份，可为null
-        			'education-category': educationCategory		// EDUCATION_CATEGORY(教育类型)对应二级code，可为null
-        		},
+          params: {
+            'current-year': currentYear, // 当前年份，可为null
+            'education-category': educationCategory // EDUCATION_CATEGORY(教育类型)对应二级code，可为null
+          },
           complete: () => {
             this.setField({
               loading: false
@@ -72,6 +72,6 @@ ce.model({
             data
           })
         })
-    },
+    }
   }
 })
