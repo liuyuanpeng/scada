@@ -71,11 +71,12 @@ const BasicForm = Form.create({
       }
     }
 
-    onChange = (e) => {
+    onChange = (value) => {
       this.setState({
-        disableOther: !e.target.checked
+        disableOther: value.findIndex(item => item === 'EDUCATION_LEVEL_OTHER') === -1
       })
     }
+
     render() {
       const formItemLayout = {
         labelCol: { span: 10 },
@@ -145,7 +146,7 @@ const BasicForm = Form.create({
               {getFieldDecorator('college_belong')(
                 <RadioGroup>
                   {this.props.collegeBelong && this.props.collegeBelong.map((item, index) => {
-                    return <Radio key={`college_belong_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Radio>
+                    return <Radio key={`college_belong_${index}`} value={item.code}>{item.name}</Radio>
                   })}
                 </RadioGroup>
               )
@@ -155,7 +156,7 @@ const BasicForm = Form.create({
               {getFieldDecorator('college_nature')(
                 <RadioGroup>
                   {this.props.collegeNature && this.props.collegeNature.map((item, index) => {
-                    return <Radio key={`college_nature_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Radio>
+                    return <Radio key={`college_nature_${index}`} value={item.code}>{item.name}</Radio>
                   })}
                 </RadioGroup>
               )
@@ -163,14 +164,13 @@ const BasicForm = Form.create({
             </FormItem>
             <FormItem label="办学层次(可多选)" {...formItemLayout}>
               {getFieldDecorator('education_level')(
-                <CheckboxGroup>
+                <CheckboxGroup onChange={this.onChange}>
                   {this.props.educationLevel && this.props.educationLevel.map((item, index) => {
-                    return <Checkbox key={`education_level_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`education_level_${index}`} value={item.code}>{item.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )
               }
-              <Checkbox checked={!this.state.disableOther} onClick={this.onChange}>其他</Checkbox>
               {getFieldDecorator('other_education_level')(
                 <Input disabled={this.state.disableOther} placeholder={this.state.disableOther ? '' : '请输入其他办学层次'} />
               )
@@ -180,7 +180,7 @@ const BasicForm = Form.create({
               {getFieldDecorator('study_mode')(
                 <CheckboxGroup>
                   {this.props.studyMode && this.props.studyMode.map((item, index) => {
-                    return <Checkbox key={`study_mode_${index}`} value={item.config_enum.code}>{item.config_enum.name}</Checkbox>
+                    return <Checkbox key={`study_mode_${index}`} value={item.code}>{item.name}</Checkbox>
                   })}
                 </CheckboxGroup>
               )

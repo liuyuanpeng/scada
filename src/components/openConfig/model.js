@@ -107,7 +107,9 @@ ce.model({
         })
         .then(res => {
           let data = {}
-          data[res.data.config.code] = res.data.config_enums
+          data[res.data.config.code] = res.data.config_enums.map(item => {
+            return item.config_enum
+          })
           this.setField({
             ...data
           })

@@ -85,11 +85,11 @@ class InformEducation extends Component {
           return <div>
             <a
               href="javascript:;"
-              onClick={() => this.modify(record)}
+              onClick={() => this.onModify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
             <Popconfirm title="确定要删除?"
-              onConfirm={() => { this.delete(record) }} >
+              onConfirm={() => { this.onDelete(record) }} >
               <a href="#">删除</a>
             </Popconfirm>
           </div>
@@ -106,7 +106,7 @@ class InformEducation extends Component {
     }
   }
 
-  modify = (record) => {
+  onModify = (record) => {
     this.setState({
       type: 'edit',
       visible: true,
@@ -114,7 +114,7 @@ class InformEducation extends Component {
     })
   }
 
-  delete = (record) => {
+  onDelete = (record) => {
     actions.informEducation.deleteById(record.id)
       .then(res => {
         message.info('删除成功!')

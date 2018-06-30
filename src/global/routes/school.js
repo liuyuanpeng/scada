@@ -1,5 +1,3 @@
-import { ROLE } from 'config/constant'
-
 import Basic from 'components/school/basic'
 import EducationOrg from 'components/school/educationOrg'
 import Rules from 'components/school/rules'

@@ -8,12 +8,12 @@ ce.model({
   },
   reducers: {},
   effects: {
-  		/**
+    /**
      * 导入继续教育机构基本信息excel表格
      * /organization/import
      */
     getList() {
-    		// 获取继续教育机构基本信息列表
+      // 获取继续教育机构基本信息列表
       return api
         .get('/organization/list', {
           complete: () => {
@@ -29,7 +29,7 @@ ce.model({
         })
     },
     saveOrganization(organization) {
-    		// 创建/更新继续教育机构基本信息
+      // 创建/更新继续教育机构基本信息
       return api
         .post('/organization/save', {
           data: organization,
@@ -58,7 +58,7 @@ ce.model({
         })
     },
     deleteByOrganizationId(organizationId) {
-    		// 删除继续教育机构基本信息
+      // 删除继续教育机构基本信息
       return api
         .delete('/organization/' + organizationId, {
           complete: () => {

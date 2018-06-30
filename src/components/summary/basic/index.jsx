@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Page from 'components/common/page'
 import { Button, Table, Popconfirm, message } from 'antd'
 import { smart, actions } from 'cat-eye'
-import RewardForm from './rewardForm'
+import BasicForm from './basicForm'
 
-class Rewards extends Component {
+class Rules extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,39 +14,48 @@ class Rewards extends Component {
     }
   }
   componentWillMount() {
-    actions.rewards.getList(null)
+    actions.schoolRules.getList()
   }
 
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
+        title: '类型',
+        dataIndex: 'type',
+        key: 'type'
       },
       {
-        title: '项目名称',
+        title: '培养层次',
         dataIndex: 'name',
         key: 'name'
       }, {
-        title: '项目来源',
-        dataIndex: 'source',
-        key: 'source'
+        title: '专业代码',
+        dataIndex: 'make_time',
+        key: 'make_time'
       }, {
-        title: '起讫时间',
-        dataIndex: 'start_and_finish_time',
-        key: 'start_and_finish_time'
+        title: '专业名称',
+        dataIndex: 'reference_number',
+        key: 'reference_number'
       }, {
-        title: '获奖情况',
-        dataIndex: 'awards',
-        key: 'awards'
+        title: '专业方向',
+        dataIndex: 'draft_name',
+        key: 'draft_name'
       }, {
-        title: '记录时间',
-        dataIndex: 'current_year',
-        key: 'current_year'
+        title: '招考方式',
+        dataIndex: 'draft_name',
+        key: 'draft_name'
+      }, {
+        title: '专业年度招生人数',
+        dataIndex: 'draft_name',
+        key: 'draft_name'
+      }, {
+        title: '在学人数',
+        dataIndex: 'draft_name',
+        key: 'draft_name'
+      }, {
+        title: '当年毕业生人数',
+        dataIndex: 'draft_name',
+        key: 'draft_name'
       }, {
         title: '操作',
         dataIndex: 'operation',
@@ -55,11 +64,11 @@ class Rewards extends Component {
           return <div>
             <a
               href="javascript:;"
-              onClick={() => this.onDelete(record)}
+              onClick={() => this.modify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
             <Popconfirm title="确定要删除?"
-              onConfirm={() => { this.onModify(record) }} >
+              onConfirm={() => { this.delete(record) }} >
               <a href="#">删除</a>
             </Popconfirm>
           </div>
@@ -76,7 +85,7 @@ class Rewards extends Component {
     }
   }
 
-  onModify = (record) => {
+  modify = (record) => {
     this.setState({
       type: 'edit',
       visible: true,
@@ -84,8 +93,8 @@ class Rewards extends Component {
     })
   }
 
-  onDelete = (record) => {
-    actions.rewards.deleteById(record.id)
+  delete = (record) => {
+    actions.schoolRules.deleteByRegulationId(record.id)
       .then(res => {
         message.info('删除成功!')
       })
@@ -113,7 +122,7 @@ class Rewards extends Component {
         return
       }
 
-      actions.rewards.save({
+      actions.schoolRules.saveRegulation({
         ...this.state.formData,
         ...values
       })
@@ -135,19 +144,19 @@ class Rewards extends Component {
   }
 
   onUploadOK = () => {
-    actions.rewards.getList(null)
+    actions.schoolRules.getList()
   }
 
   render() {
     return (
-      <Page importUri={'/college-continue-education-status/import'} onSuccess={this.onUploadOK}>
+      <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK}>
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
           dataSource={this.data()}
           pagination={false}
         />
-        <RewardForm
+        <BasicForm
           wrappedComponentRef={this.saveFormRef}
           data={this.state.formData}
           type={this.state.type}
@@ -161,6 +170,6 @@ class Rewards extends Component {
 
 export default smart(state => {
   return {
-    data: state.rewards.data
+    data: state.schoolRules.data
   }
-})(Rewards)
+})(Rules)

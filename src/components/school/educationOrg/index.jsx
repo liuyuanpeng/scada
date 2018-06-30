@@ -41,9 +41,9 @@ class EducationOrg extends Component {
           const modes = text.split('|')
           const modeNames = this.props.studyMode && modes.map(code => {
             const rt = this.props.studyMode.find((item) => {
-              return item.config_enum.code === code
+              return item.code === code
             })
-            return rt.config_enum.name
+            return rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -76,11 +76,11 @@ class EducationOrg extends Component {
           return <div>
             <a
               href="javascript:;"
-              onClick={() => this.modify(record)}
+              onClick={() => this.onModify(record)}
               style={{ marginRight: 8 }}
             >修改</a>
             <Popconfirm title="确定要删除?"
-              onConfirm={() => { this.delete(record) }} >
+              onConfirm={() => { this.onDelte(record) }} >
               <a href="#">删除</a>
             </Popconfirm>
           </div>
@@ -97,7 +97,7 @@ class EducationOrg extends Component {
     }
   }
 
-  modify = (record) => {
+  onModify = (record) => {
     this.setState({
       type: 'edit',
       visible: true,
@@ -105,7 +105,7 @@ class EducationOrg extends Component {
     })
   }
 
-  delete = (record) => {
+  onDelte = (record) => {
     actions.schoolEducationOrg.deleteByOrganizationId(record.id)
       .then(res => {
         message.info('删除成功!')

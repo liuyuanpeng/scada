@@ -15,6 +15,7 @@ import nestMenuRoutes from './nest-menu'
 import schoolRoutes from './school'
 import informEducation from './informEducation'
 import rewardsRoutes from './rewards'
+import summaryRoutes from './summary'
 
 import Admin from 'components/admin'
 
@@ -77,6 +78,7 @@ router.register({
         path: '/admin',
         component: Admin
       },
+      summary: summaryRoutes,
       school: schoolRoutes,
       informEducation: informEducation,
       rewards: rewardsRoutes
