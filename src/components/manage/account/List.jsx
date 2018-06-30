@@ -25,6 +25,7 @@ class List extends Component {
     ]
     return (
       <Table
+        bordered
         columns={columns}
         dataSource={props.list.data}
         pagination={props.list.pagination}

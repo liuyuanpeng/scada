@@ -113,7 +113,7 @@ class Admin extends Component {
       <div>
         <Button type="primary" onClick={this.onAddCollege}>新增学校</Button>
         <h1 />
-        <Table columns={this.getColumns()} dataSource={this.getListData()} pagination={false} />
+        <Table bordered columns={this.getColumns()} dataSource={this.getListData()} pagination={false} />
         <UserForm
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}

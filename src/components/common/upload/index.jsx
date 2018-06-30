@@ -9,6 +9,16 @@ export default class extends Component {
       onError: PropTypes.func
     }
 
+    onSuccess = info => {
+      message.info('导入成功!')
+      this.props.onSuccess && this.props.onSuccess(info)
+    }
+
+    onError = info => {
+      message.error('导入失败!')
+      this.props.onError && this.props.onError(info)
+    }
+
     onChange = info => {
       if (info.file.status !== 'uploading') {
         this.hideTip = message.loading('导入中，请稍后...')
@@ -16,21 +26,18 @@ export default class extends Component {
       if (info.file.status === 'done') {
         if (info.file.response.code !== 'SUCCESS') {
           message.error(info.file.response.message, 3)
-          console.log('导入失败')
           this.props.onError && this.props.onError(info)
           if (this.hideTip) {
             this.hideTip()
           }
           return
         }
-        console.log('导入成功')
-        this.props.onSuccess && this.props.onSuccess(info)
+        this.onSuccess(info)
         if (this.hideTip) {
           this.hideTip()
         }
       } else if (info.file.status === 'error') {
-        console.log('导入失败')
-        this.props.onError && this.props.onError(info)
+        this.onError(info)
         if (this.hideTip) {
           this.hideTip()
         }

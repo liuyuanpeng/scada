@@ -13,6 +13,7 @@ class Rules extends Component {
       formData: {}
     }
   }
+
   componentWillMount() {
     actions.openConfig.getListByConfig({code: 'EXAM_ENTRANCE'})
     actions.openConfig.getListByConfig({code: 'EDUCATION_CATEGORY'})
@@ -209,8 +210,9 @@ class Rules extends Component {
   render() {
     return (
       <Page importUri={'/organization-scale/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY">
-        <Button type="primary" onClick={this.onAdd}>新增</Button>
+        <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
+          bordered
           columns={this.columns()}
           dataSource={this.data()}
           pagination={false}

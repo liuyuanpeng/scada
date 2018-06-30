@@ -13,7 +13,6 @@ let years = []
 for (let i = curYear; i >= startYear; i--) {
   years.push(`${i}`)
 }
-console.log(years)
 
 ce.model({
   name: 'page',

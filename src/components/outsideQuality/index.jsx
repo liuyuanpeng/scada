@@ -149,8 +149,9 @@ class OutsideQuality extends Component {
   render() {
     return (
       <div>
-        <Button type="primary" onClick={this.onAdd}>新增</Button>
+        <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
+          bordered
           columns={this.columns()}
           dataSource={this.data()}
           pagination={false}

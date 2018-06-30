@@ -8,7 +8,6 @@ const {
 ce.model({
   name: 'openConfig', // 开放配置
   state: {
-    data: []
   },
   reducers: {},
   effects: {
@@ -74,23 +73,23 @@ ce.model({
     },
     getMap() {
       // 获取所有配置映射列表
-      return api
-        .get('/open-config/map', {
-          complete: () => {
-            this.setField({
-              loading: false
-            })
-          }
-        })
-        .then(res => {
-          this.setField({
-            data: res ? res.data : []
-          })
-        })
+      // return api
+      //   .get('/open-config/map', {
+      //     complete: () => {
+      //       this.setField({
+      //         loading: false
+      //       })
+      //     }
+      //   })
+      //   .then(res => {
+      //     this.setField({
+      //       data: res ? res.data : []
+      //     })
+      //   })
     },
     getListByConfig({code, exCode}) {
       // 获取指定一级配置的配置结构列表(去除该一级配置下指定的二级配置，configCode详见本文件目录下open-config.md)
-      if (this.getState()[code] && !exCode) {
+      if (this.getState().hasOwnProperty(code)) {
         return
       }
       return api
@@ -108,6 +107,9 @@ ce.model({
         .then(res => {
           let data = {}
           data[res.data.config.code] = res.data.config_enums.map(item => {
+            if (item.config_enum_values && item.config_enum_values.length) {
+              data[item.config_enum.code] = item.config_enum_values
+            }
             return item.config_enum
           })
           this.setField({

@@ -4,7 +4,8 @@ const { api } = request
 ce.model({
   name: 'summaryGenderAge', // 学生来源统计 - 性别年龄职业统计
   state: {
-    data: {}
+    data: {},
+    professionData: {}
   },
   reducers: {},
   effects: {
@@ -23,7 +24,7 @@ ce.model({
         })
         .then(res => {
           this.setField({
-            data: res ? res.data : {}
+            data: res.data ? res.data : {}
           })
         })
     },
@@ -42,7 +43,7 @@ ce.model({
         })
         .then(res => {
           this.setField({
-            data: res ? res.data : {}
+            professionData: res.data ? res.data : {}
           })
         })
     },
@@ -57,18 +58,8 @@ ce.model({
           }
         })
         .then(res => {
-          let data = this.getState().data.concat()
-          if (student.id) {
-            // 修改
-            for (let i = 0; i < datadata[student.config_enum_code].length; i++) {
-              if (datadata[student.config_enum_code][i].id === student.id) {
-                data[student.config_enum_code][i] = res.data
-                break
-              }
-            }
-          } else {
-            data[student.config_enum_code].push(res.data)
-          }
+          let data = {...this.getState().data}
+          data[student.config_enum_value_code] = res.data
           this.setField({
             data
           })
