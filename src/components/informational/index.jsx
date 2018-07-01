@@ -59,7 +59,7 @@ class Informational extends Component {
         key: 'source',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.source && modes.map(code => {

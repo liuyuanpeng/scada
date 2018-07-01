@@ -38,6 +38,9 @@ class EducationOrg extends Component {
         dataIndex: 'study_mode',
         key: 'study_mode',
         render: (text, record) => {
+          if (!text) {
+            return ''
+          }
           const modes = text.split('|')
           const modeNames = this.props.studyMode && modes.map(code => {
             const rt = this.props.studyMode.find((item) => {

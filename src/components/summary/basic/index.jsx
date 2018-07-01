@@ -43,7 +43,7 @@ class Rules extends Component {
         key: 'study_mode',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.studyMode && modes.map(code => {
@@ -61,7 +61,7 @@ class Rules extends Component {
         key: 'education_level',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.educationLevel && modes.map(code => {
@@ -90,7 +90,7 @@ class Rules extends Component {
         key: 'exam_entrance',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.examEntrance && modes.map(code => {

@@ -35,6 +35,9 @@ class OutsideQuality extends Component {
         dataIndex: 'quality_evaluate',
         key: 'quality_evaluate',
         render: (text, record) => {
+          if (!text) {
+            return ''
+          }
           const modes = text.split('|')
           const modeNames = this.props.qualityEvaluate && modes.map(code => {
             const rt = this.props.qualityEvaluate.find((item) => {

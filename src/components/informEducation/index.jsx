@@ -40,6 +40,9 @@ class InformEducation extends Component {
         dataIndex: 'enroll_student',
         key: 'enroll_student',
         render: (text, record) => {
+          if (!text) {
+            return ''
+          }
           const modes = text.split('|')
           const modeNames = this.props.enrollStudent && modes.map(code => {
             const rt = this.props.enrollStudent.find((item) => {

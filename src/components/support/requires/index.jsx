@@ -45,10 +45,10 @@ class SupportRequires extends Component {
         key: 'reference_answer_time',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           if (text === 'ANSWER_TIME_OTHER') {
-            return record.other_reference_answer_time;
+            return record.other_reference_answer_time
           }
           const modes = text.split('|')
           const modeNames = this.props.referenceAnswerTime && modes.map(code => {
@@ -72,10 +72,10 @@ class SupportRequires extends Component {
         key: 'complaint_answer_time',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           if (text === 'ANSWER_TIME_OTHER') {
-            return record.other_complaint_answer_time;
+            return record.other_complaint_answer_time
           }
           const modes = text.split('|')
           const modeNames = this.props.complaintAnswerTime && modes.map(code => {

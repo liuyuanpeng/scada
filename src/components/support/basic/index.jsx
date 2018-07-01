@@ -60,7 +60,7 @@ class SupportBasic extends Component {
         key: 'evaluate_status',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.evaluateStatus && modes.map(code => {
@@ -77,7 +77,7 @@ class SupportBasic extends Component {
         key: 'center_nature',
         render: (text, record) => {
           if (!text) {
-            return null
+            return ''
           }
           const modes = text.split('|')
           const modeNames = this.props.centerNature && modes.map(code => {
