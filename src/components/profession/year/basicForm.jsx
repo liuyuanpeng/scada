@@ -74,11 +74,11 @@ export default Form.create({
             </FormItem>
             <FormItem label="类型">
               {getFieldDecorator('study_mode')(
-                <CheckboxGroup>
+                <RadioGroup>
                   {this.props.studyMode && this.props.studyMode.map((item, index) => {
-                    return <Checkbox key={`${index}`} value={item.code}>{item.name}</Checkbox>
+                    return <Radio key={`${index}`} value={item.code}>{item.name}</Radio>
                   })}
-                </CheckboxGroup>
+                </RadioGroup>
               )}
             </FormItem>
             <FormItem label="培养层次">
