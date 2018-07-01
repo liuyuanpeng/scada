@@ -12,9 +12,6 @@ export default Form.create({
   mapPropsToFields(props) {
     return {
       ...createFormFields(props.data),
-      study_mode: createFormField({
-        value: props.data.study_mode && props.data.study_mode.split('|')
-      }),
       education_level: createFormField({
         value: props.data.education_level && props.data.education_level.split('|')
       }),
