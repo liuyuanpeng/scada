@@ -31,14 +31,6 @@ class FundsOut extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      },
-      {
         title: '教学人员(万元)',
         dataIndex: 'teacher_salary',
         key: 'teacher_salary'

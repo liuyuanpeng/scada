@@ -30,14 +30,6 @@ class StudyEffect extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      },
-      {
         title: '是否开展学生满意度调查',
         dataIndex: 'has_student_satisfaction_survey',
         key: 'has_student_satisfaction_survey',

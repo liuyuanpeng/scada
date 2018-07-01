@@ -36,14 +36,6 @@ class FundsTuition extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      },
-      {
         title: '类型',
         dataIndex: 'study_mode',
         key: 'study_mode',
@@ -182,7 +174,6 @@ class FundsTuition extends Component {
       actions.fundsTuition.save({
         ...this.state.formData,
         ...values,
-        study_mode: values.study_mode.join('|'),
         education_level: values.education_level.join('|'),
         other_education_level: values.education_level.findIndex(item => item === 'EDUCATION_LEVEL_OTHER') === -1 ? '' : values.other_education_level
       })

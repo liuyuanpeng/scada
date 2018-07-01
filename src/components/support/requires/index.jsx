@@ -32,13 +32,6 @@ class SupportRequires extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      }, {
         title: '对学生咨询做出回应的时间规定(有无)',
         dataIndex: 'has_reference',
         key: 'has_reference',
@@ -54,6 +47,9 @@ class SupportRequires extends Component {
           if (!text) {
             return null
           }
+          if (text === 'ANSWER_TIME_OTHER') {
+            return record.other_reference_answer_time;
+          }
           const modes = text.split('|')
           const modeNames = this.props.referenceAnswerTime && modes.map(code => {
             const rt = this.props.referenceAnswerTime.find((item) => {
@@ -63,10 +59,6 @@ class SupportRequires extends Component {
           })
           return modeNames ? modeNames.join('、') : ''
         }
-      }, {
-        title: '其他咨询规定的回应时间',
-        dataIndex: 'other_reference_answer_time',
-        key: 'other_reference_answer_time'
       }, {
         title: '对学生投诉做出回应的时间规定(有无)',
         dataIndex: 'has_complaint',
@@ -82,6 +74,9 @@ class SupportRequires extends Component {
           if (!text) {
             return null
           }
+          if (text === 'ANSWER_TIME_OTHER') {
+            return record.other_complaint_answer_time;
+          }
           const modes = text.split('|')
           const modeNames = this.props.complaintAnswerTime && modes.map(code => {
             const rt = this.props.complaintAnswerTime.find((item) => {
@@ -91,10 +86,6 @@ class SupportRequires extends Component {
           })
           return modeNames ? modeNames.join('、') : ''
         }
-      }, {
-        title: '其他投诉规定的回应时间',
-        dataIndex: 'other_complaint_answer_time',
-        key: 'other_complaint_answer_time'
       }, {
         title: '记录时间',
         dataIndex: 'current_year',

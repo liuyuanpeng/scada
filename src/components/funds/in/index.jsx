@@ -31,14 +31,6 @@ class FundsIn extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      },
-      {
         title: '年学费收入(万元)',
         dataIndex: 'tuition_income',
         key: 'tuition_income'

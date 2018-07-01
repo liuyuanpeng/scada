@@ -12,6 +12,9 @@ export default Form.create({
   mapPropsToFields(props) {
     return {
       ...createFormFields(props.data),
+      has_qualify: createFormField({
+        value: props.data.has_qualify ? 'yes' : 'no'
+      }),
       education_level: createFormField({
         value: props.data.education_level && props.data.education_level.split('|')
       })
@@ -31,7 +34,7 @@ export default Form.create({
         disableEducationLevel: value.findIndex(item => item === 'EDUCATION_LEVEL_OTHER') === -1
       })
     }
-    
+
     render() {
       const { visible, onCancel, onOK, form } = this.props
       const { getFieldDecorator } = form
@@ -55,18 +58,36 @@ export default Form.create({
                 </Select>
               )}
             </FormItem>
-            <FormItem label="类型">
-              {getFieldDecorator('study_mode')(
+            <FormItem label="合作单位名称">
+              {getFieldDecorator('name', {
+                rules: [
+                  {
+                    required: true, message: '请输入合作单位名称'
+                  }]
+              })(
+                <Input placeholder="请输入合作单位名称" />
+              )}
+            </FormItem>
+            <FormItem label="合作单位性质">
+              {getFieldDecorator('center_cooperator_nature')(
                 <RadioGroup>
                   {
-                    this.props.studyMode && this.props.studyMode.map((item, index) => {
+                    this.props.cooperatorNature && this.props.cooperatorNature.map((item, index) => {
                       return <Radio key={`${index}`} value={item.code}>{item.name}</Radio>
                     })
                   }
                 </RadioGroup>
               )}
             </FormItem>
-            <FormItem label="培养层次">
+            <FormItem label="是否具有办学资格">
+              {getFieldDecorator('has_qualify')(
+                <RadioGroup>
+                  <Radio value={'yes'}>是</Radio>
+                  <Radio value={'no'}>否</Radio>
+                </RadioGroup>
+              )}
+            </FormItem>
+            <FormItem label="合作单位办学层次">
               {getFieldDecorator('education_level')(
                 <CheckboxGroup onChange={this.onEducationLevelChange}>
                   {this.props.educationLevel && this.props.educationLevel.map((item, index) => {
@@ -76,43 +97,13 @@ export default Form.create({
               )
               }
               {getFieldDecorator('other_education_level')(
-                <Input disabled={this.state.disableEducationLevel} placeholder={this.state.disableEducationLevel ? '' : '请输入其他培养层次'} />
+                <Input disabled={this.state.disableEducationLevel} placeholder={this.state.disableEducationLevel ? '' : '请输入其他办学层次'} />
               )
               }
             </FormItem>
-            <FormItem label="专业代码">
-              {getFieldDecorator('subject_code')(
-                <Input placeholder="请输入专业代码" />
-              )}
-            </FormItem>
-            <FormItem label="专业名称">
-              {getFieldDecorator('subject_name')(
-                <Input placeholder="请输入专业代码" />
-              )}
-            </FormItem>
-            <FormItem label="专业方向">
-              {getFieldDecorator('subject_direction')(
-                <Input placeholder="请输入专业方向" />
-              )}
-            </FormItem>
-            <FormItem label="学费标准最低 (元/学年)">
-              {getFieldDecorator('min_per_year')(
-                <Input placeholder="请输入学费标准最低 (元/学年)" />
-              )}
-            </FormItem>
-            <FormItem label="学费标准最高 (元/学年)">
-              {getFieldDecorator('max_per_year')(
-                <Input placeholder="请输入学费标准最高 (元/学年)" />
-              )}
-            </FormItem>
-            <FormItem label="学费标准最低 (元/学分)">
-              {getFieldDecorator('min_per_score')(
-                <Input placeholder="请输入学费标准最低 (元/学分)" />
-              )}
-            </FormItem>
-            <FormItem label="学费标准最高 (元/学分)">
-              {getFieldDecorator('max_per_score')(
-                <Input placeholder="请输入学费标准最高 (元/学分)" />
+            <FormItem label="合作开始年份">
+              {getFieldDecorator('start_cooperate_year')(
+                <Input placeholder="请输入合作开始年份" />
               )}
             </FormItem>
           </Form>

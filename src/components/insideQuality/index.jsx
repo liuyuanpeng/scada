@@ -30,14 +30,6 @@ class InsideQuality extends Component {
   columns = () => {
     return [
       {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        render: (text, record, index) => {
-          return <span>{`${index + 1}`}</span>
-        }
-      },
-      {
         title: '是否建立内部质量保证部门',
         dataIndex: 'has_guarantee_dept',
         key: 'has_guarantee_dept',
