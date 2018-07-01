@@ -148,8 +148,8 @@ class InformEducation extends Component {
       actions.informEducation.save({
         ...this.state.formData,
         ...values,
-        enroll_student: values.enroll_student.join('|'),
-        education_mode: values.education_mode.join('|')
+        enroll_student: values.enroll_student && values.enroll_student.join('|'),
+        education_mode: values.education_mode && values.education_mode.join('|')
       })
         .then(res => {
           message.info('操作成功!')

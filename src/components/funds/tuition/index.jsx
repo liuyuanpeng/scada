@@ -174,8 +174,8 @@ class FundsTuition extends Component {
       actions.fundsTuition.save({
         ...this.state.formData,
         ...values,
-        education_level: values.education_level.join('|'),
-        other_education_level: values.education_level.findIndex(item => item === 'EDUCATION_LEVEL_OTHER') === -1 ? '' : values.other_education_level
+        education_level: values.education_level && values.education_level.join('|'),
+        other_education_level: values.education_level && (values.education_level.findIndex(item => item === 'EDUCATION_LEVEL_OTHER') === -1 ? '' : values.other_education_level)
       })
         .then(res => {
           message.info('操作成功!')

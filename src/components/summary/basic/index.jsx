@@ -182,9 +182,9 @@ class Rules extends Component {
       actions.summaryBasic.save({
         ...this.state.formData,
         ...values,
-        study_mode: values.study_mode.join('|'),
-        education_level: values.education_level.join('|'),
-        exam_entrance: values.exam_entrance.join('|')
+        study_mode: values.study_mode && values.study_mode.join('|'),
+        education_level: values.education_level && values.education_level.join('|'),
+        exam_entrance: values.exam_entrance && values.exam_entrance.join('|')
       })
         .then(res => {
           message.info('操作成功!')

@@ -50,8 +50,8 @@ const BasicForm = Form.create({
           actions.schoolBasic.saveCollege({
             ...values,
             id: this.props.data.id,
-            education_level: values.education_level.join('|'),
-            study_mode: values.study_mode.join('|'),
+            education_level: values.education_level && values.education_level.join('|'),
+            study_mode: values.study_mode && values.study_mode.join('|'),
             has_continue_education_strategy_plan: values.has_continue_education_strategy_plan === 'yes',
             is_continue_education_important_project: values.is_continue_education_important_project === 'yes'
           }).then(res => {

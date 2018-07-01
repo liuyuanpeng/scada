@@ -140,7 +140,7 @@ class EducationOrg extends Component {
         has_manage_department: values.has_manage_department === 'yes',
         has_non_degree_education: values.has_non_degree_education === 'yes',
         has_self_study_exam: values.has_self_study_exam === 'yes',
-        study_mode: values.study_mode.join('|')
+        study_mode: values.study_mode && values.study_mode.join('|')
       })
         .then(res => {
           message.info('操作成功!')

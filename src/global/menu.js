@@ -61,11 +61,11 @@ export const generateMenus = () => {
             }
           ]
         },
-        {
-          name: '全日制教育与继续教育',
-          icon: 'table',
-          url: 'main.compare'
-        },
+        // {
+        //   name: '全日制教育与继续教育',
+        //   icon: 'table',
+        //   url: 'main.compare'
+        // },
         {
           name: '专业设置',
           icon: 'info-circle-o',

@@ -171,8 +171,8 @@ class Rules extends Component {
       actions.professionScore.save({
         ...this.state.formData,
         ...values,
-        study_mode: values.study_mode.join('|'),
-        education_level: values.education_level.join('|'),
+        study_mode: values.study_mode && values.study_mode.join('|'),
+        education_level: values.education_level && values.education_level.join('|'),
         is_college_special: values.is_college_special === 'yes',
         is_province_special: values.is_college_special === 'yes'
       })

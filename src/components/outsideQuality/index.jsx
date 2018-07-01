@@ -17,7 +17,7 @@ class OutsideQuality extends Component {
     actions.openConfig.getListByConfig({code: 'QUALITY_EVALUATE'})
     this.updateList(this.props.year)
   }
-  
+
   updateList(year) {
     year && actions.outsideQuality.getList(year)
   }
@@ -125,7 +125,7 @@ class OutsideQuality extends Component {
       actions.outsideQuality.save({
         ...this.state.formData,
         ...values,
-        quality_evaluate: values.quality_evaluate.join('|'),
+        quality_evaluate: values.quality_evaluate && values.quality_evaluate.join('|')
       })
         .then(res => {
           message.info('操作成功!')
@@ -177,6 +177,6 @@ export default smart(state => {
     data: state.outsideQuality.data,
     year: state.page.year,
     years: state.page.years,
-    qualityEvaluate: state.openConfig.QUALITY_EVALUATE,
+    qualityEvaluate: state.openConfig.QUALITY_EVALUATE
   }
 })(OutsideQuality)
