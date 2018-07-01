@@ -37,7 +37,7 @@ export default smart(state => {
     render() {
       return (
         <div>
-          {this.props.showYear && <Select style={{width: '200px', marginRight: '10px', marginBottom: '10px'}} value={this.props.year} onChange={this.onChange}>
+          {this.props.showYear && <Select style={{width: '200px', marginRight: '10px', marginBottom: '10px'}} value={`${this.props.year}`} onChange={this.onChange}>
             {
               this.props.years && this.props.years.map((item, index) => {
                 return <Option key={`${index}`} value={item}>{`${item} 年`}</Option>
