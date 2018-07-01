@@ -15,6 +15,16 @@ export default Form.create()(
           onCancel={onCancel}
         >
           <Form layout="vertical">
+            <FormItem label="学校代码">
+              {getFieldDecorator('college_code', {
+                rules: [
+                  {
+                    required: true, message: '请输入学校代码'
+                  }]
+              })(
+                <Input />
+              )}
+            </FormItem>
             <FormItem label="学校名称">
               {getFieldDecorator('name', {
                 rules: [

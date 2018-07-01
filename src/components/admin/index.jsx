@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'antd'
+import { Table, Input, Button } from 'antd'
 import { smart, actions } from 'cat-eye'
 import UserForm from './userForm'
 import CollegeForm from './collegeForm'
 import md5 from 'md5'
+import Page from 'components/common/page'
 
 class Admin extends Component {
   constructor(props) {
@@ -20,8 +21,13 @@ class Admin extends Component {
   getColumns = () => {
     return [
       {
+        key: 'college_code',
+        title: '学校代码',
+        dataIndex: 'college_code'
+      },
+      {
         key: 'name',
-        title: '学校',
+        title: '学校名称',
         dataIndex: 'name'
       },
       {
@@ -46,6 +52,7 @@ class Admin extends Component {
         return {
           key: `${index}`,
           id: item.college.id,
+          college_code: item.college.college_code,
           name: item.college.name,
           user: item.user ? item.user.username : ''
         }
@@ -107,10 +114,18 @@ class Admin extends Component {
       this.setState({ addCollege: false })
     })
   }
+  
+  onUploadOK = () => {
+    actions.admin.getData()
+  }
+  
+  onSearchCollegeChange = value => {
+    console.error(value.target.value)
+  }
 
   render() {
     return (
-      <div>
+      <Page importUri={'/college/import'} onSuccess={this.onUploadOK} >
         <Button type="primary" onClick={this.onAddCollege}>新增学校</Button>
         <h1 />
         <Table bordered columns={this.getColumns()} dataSource={this.getListData()} pagination={false} />
@@ -126,7 +141,7 @@ class Admin extends Component {
           onCancel={this.handleCancel}
           onCreate={this.handleAddCollege}
         />
-      </div>
+      </Page>
     )
   }
 }
