@@ -38,11 +38,9 @@ ce.model({
   effects: {
     getTypes(type, allState) {
       if (this.getState().types && this.getState().types.hasOwnProperty(type)) {
-        if (!this.getState().type) {
-          this.setField({
-            type: this.getState().types[type][0].code
-          })
-        }
+        this.setField({
+          type: this.getState().types[type][0].code
+        })
         return
       }
       if (allState().openConifg && allState().openConifg.hasOwnProperty(type)) {
