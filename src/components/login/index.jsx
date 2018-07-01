@@ -13,10 +13,7 @@ const Login = props => {
   if (props.user.status === USER_STATUS.LOGINED) {
     return (
       <Redirect
-        to={urlFor('main', {
-          age: 22,
-          name: 33
-        })}
+        to={urlFor('main')}
       />
     )
   }

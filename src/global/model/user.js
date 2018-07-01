@@ -79,6 +79,9 @@ ce.model({
             collegeId: data.data.college ? data.data.college.id : ''
           })
         })
+        .catch(e => {
+          console.log('e: ', e)
+        })
     },
     // 退出登录
     logout() {

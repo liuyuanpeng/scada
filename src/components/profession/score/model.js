@@ -4,22 +4,22 @@ const { api } = request
 ce.model({
   name: 'professionScore', // 专业设置 - 学分制
   state: {
-  		data: []
+    data: []
   },
   reducers: {},
   effects: {
-  		/**
+    /**
      * 导入学分制专业设置一览表
      * /major-setup-point-system/import
      */
-    /**=====================================*/
+    /** ===================================== */
     getList({currentYear, studyMode}) {
       return api
         .get('/major-setup-point-system/list', {
-        		params: {
-        			'current-year': currentYear,	// 当前年份，可为null
-        			'study-mode': studyMode		// STUDY_MODE(学习类型)对应二级code，可为null
-        		},
+          params: {
+            'current-year': currentYear, // 当前年份，可为null
+            'study-mode': studyMode // STUDY_MODE(学习类型)对应二级code，可为null
+          },
           complete: () => {
             this.setField({
               loading: false
@@ -77,6 +77,6 @@ ce.model({
             data
           })
         })
-    },
+    }
   }
 })

@@ -17,13 +17,14 @@ for (let i = curYear; i >= startYear; i--) {
 ce.model({
   name: 'page',
   state: {
-    year: `${curYear}`,
+    year: localStorage.getItem('curYear') ? parseInt(localStorage.getItem('curYear')) : `${curYear}`,
     years,
     types: {},
     type: ''
   },
   reducers: {
     setYear(year) {
+      localStorage.setItem('curYear', year)
       return this.setField({
         year
       })

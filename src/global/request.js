@@ -20,6 +20,9 @@ request.config({
   },
   error: function (res) {
     let msg = getIn(res, 'data.meta.message') || '您的请求遇到了错误，请稍候再试'
+    if (res.data.code === 'USER_SESSION_EXPIRED') {
+      localStorage.setItem('expires', 0)
+    }
     message.error(msg, 5)
   },
   complete: function (res) {
