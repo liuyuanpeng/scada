@@ -168,7 +168,7 @@ class EducationOrg extends Component {
 
   render() {
     return (
-      <Page importUri={'/organization/import'} onSuccess={this.onUploadOK}>
+      <Page importUri={'/organization/import'} onSuccess={this.onUploadOK} downloadUri='organization' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

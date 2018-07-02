@@ -188,7 +188,7 @@ class SupportCorp extends Component {
 
   render() {
     return (
-      <Page importUri={'/non-public-study-center-cooperator/import'} onSuccess={this.onUploadOK} showYear >
+      <Page importUri={'/non-public-study-center-cooperator/import'} onSuccess={this.onUploadOK} showYear downloadUri='non-public-study-center-cooperator' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

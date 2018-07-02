@@ -190,7 +190,7 @@ class SupportBasic extends Component {
 
   render() {
     return (
-      <Page importUri={'/non-public-study-center/import'} onSuccess={this.onUploadOK} showYear >
+      <Page importUri={'/non-public-study-center/import'} onSuccess={this.onUploadOK} showYear downloadUri='non-public-study-center' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

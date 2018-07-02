@@ -209,7 +209,7 @@ class Rules extends Component {
 
   render() {
     return (
-      <Page importUri={'/organization-scale/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY">
+      <Page importUri={'/organization-scale/import'} onSuccess={this.onUploadOK} showYear configType="EDUCATION_CATEGORY" downloadUri='organization-scale' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

@@ -136,7 +136,7 @@ class Rules extends Component {
 
   render() {
     return (
-      <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK}>
+      <Page importUri={'/college-regulation/import'} onSuccess={this.onUploadOK} downloadUri='college-regulation'>
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

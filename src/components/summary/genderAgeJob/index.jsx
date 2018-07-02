@@ -200,7 +200,7 @@ class GenderAgeJob extends Component {
 
   render() {
     return (
-      <Page importUri={'/student/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE">
+      <Page importUri={'/student/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE" downloadUri='student' >
         <Table
           bordered
           showHeader={false}

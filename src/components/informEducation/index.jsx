@@ -177,7 +177,7 @@ class InformEducation extends Component {
 
   render() {
     return (
-      <Page importUri={'/non-degree-continue-education-status/import'} onSuccess={this.onUploadOK} showYear>
+      <Page importUri={'/non-degree-continue-education-status/import'} onSuccess={this.onUploadOK} showYear downloadUri='non-degree-continue-education-status'>
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

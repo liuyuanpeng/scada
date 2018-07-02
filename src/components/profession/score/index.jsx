@@ -198,7 +198,7 @@ class Rules extends Component {
 
   render() {
     return (
-      <Page importUri={'/major-setup-point-system/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE">
+      <Page importUri={'/major-setup-point-system/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE" downloadUri='major-setup-point-system' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

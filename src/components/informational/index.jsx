@@ -168,7 +168,7 @@ class Informational extends Component {
 
   render() {
     return (
-      <Page importUri={'/information-application/import'} onSuccess={this.onUploadOK} showYear >
+      <Page importUri={'/information-application/import'} onSuccess={this.onUploadOK} showYear downloadUri='information-application' >
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}

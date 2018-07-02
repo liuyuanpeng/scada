@@ -151,7 +151,7 @@ class Rewards extends Component {
 
   render() {
     return (
-      <Page importUri={'/college-continue-education-status/import'} onSuccess={this.onUploadOK} showYear >
+      <Page importUri={'/college-continue-education-status/import'} onSuccess={this.onUploadOK} showYear downloadUri='college-continue-education-status' >
         <Button style={{marginBottom: '24px'}} type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           bordered

@@ -204,7 +204,7 @@ class TeachClasses extends Component {
 
   render() {
     return (
-      <Page importUri={'/courseware/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE" >
+      <Page importUri={'/courseware/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE" downloadUri='courseware' >
         <Button type="primary" onClick={this.onAdd}>新增</Button>
         <Table
           columns={this.columns()}
