@@ -55,7 +55,7 @@ export default class extends Component {
           action={`/api_wds/v0.1/ceqas${this.props.action}`}
           onChange={this.onChange}>
           <Button>
-            <Icon type="upload" />导入
+            <Icon type="upload" />导入Excel数据
           </Button>
         </Upload>
       )

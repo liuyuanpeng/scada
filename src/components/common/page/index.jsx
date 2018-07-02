@@ -39,6 +39,10 @@ export default smart(state => {
     getExport = () => {
       window.open(`http://119.23.9.49/v0.1/ceqas/${this.props.downloadUri}/export?is-template=false&token=${localStorage.getItem('accessToken')}`)
     }
+    
+    getTemplateExport = () => {
+      window.open(`http://119.23.9.49/v0.1/ceqas/${this.props.downloadUri}/export?is-template=true&token=${localStorage.getItem('accessToken')}`)
+    }
 
     render() {
       return (
@@ -61,14 +65,14 @@ export default smart(state => {
           }
           {this.props.downloadUri &&
           <div className={styles.float_btn}>
-            <a href={`http://119.23.9.49/v0.1/ceqas/${this.props.downloadUri}/export?is-template=true&token=${localStorage.getItem('accessToken')}`} target="_blank">
-                下载Excel模板
-            </a>
+            <Button onClick={this.getTemplateExport}>
+              <Icon type="download" />下载Excel数据导入模板
+            </Button>
           </div>}
           {this.props.downloadUri &&
           <div className={styles.float_btn}>
             <Button onClick={this.getExport}>
-              <Icon type="download" />导出
+              <Icon type="download" />导出所有数据
             </Button>
           </div>}
           {this.props.importUri &&
