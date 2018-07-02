@@ -7,6 +7,26 @@ export const generateMenus = () => {
         name: '学校',
         icon: 'bars',
         url: 'main.admin'
+      },
+      {
+        name: '开放配置',
+        icon: 'bars',
+        sub: [
+        {
+          name: '一级配置',
+          icon: 'table',
+          url: 'main.open.config'
+        },
+        {
+          name: '二级配置',
+          icon: 'table',
+          url: 'main.open.enum'
+        }, {
+          name: '三级配置',
+          icon: 'table',
+          url: 'main.open.value'
+        }
+      ]
       }
     ]
     menuCache = {}

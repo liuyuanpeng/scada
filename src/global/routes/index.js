@@ -12,6 +12,7 @@ import Home from 'components/home'
 import manageRoutes from './manage'
 import examplesRoutes from './examples'
 import nestMenuRoutes from './nest-menu'
+import openRoutes from './open'
 import schoolRoutes from './school'
 import informEducation from './informEducation'
 import rewardsRoutes from './rewards'
@@ -89,6 +90,7 @@ router.register({
         path: '/admin',
         component: Admin
       },
+      open: openRoutes,
       summary: summaryRoutes,
       school: schoolRoutes,
       compare: {

@@ -125,7 +125,7 @@ class Admin extends Component {
 
   render() {
     return (
-      <Page importUri={'/college/import'} onSuccess={this.onUploadOK} >
+      <Page importUri={'/college/import'} onSuccess={this.onUploadOK} downloadUri='college' >
         <Button type="primary" onClick={this.onAddCollege}>新增学校</Button>
         <h1 />
         <Table bordered columns={this.getColumns()} dataSource={this.getListData()} pagination={false} />

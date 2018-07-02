@@ -12,7 +12,7 @@ export default {
       description: '基本信息'
     },
     educationOrg: {
-      path: '/educationorg',
+      path: '/educationOrg',
       component: EducationOrg,
       description: '办学机构'
     },
