@@ -12,11 +12,11 @@ const config = {
     mode: 'cors',
     wds: {
       prefix: '/v0.1/ceqas',
-      url: 'http://119.23.9.49'
+      url: 'http://117.34.70.238'
     },
     defaults: {
       prefix: '/v0.1/ceqas',
-      url: 'http://119.23.9.49'
+      url: 'http://117.34.70.238'
     }
   },
   example: {

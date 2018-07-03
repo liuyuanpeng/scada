@@ -52,7 +52,7 @@ export default class extends Component {
           headers={
             {token: localStorage.getItem('accessToken')}
           }
-          action={`/api_wds/v0.1/ceqas${this.props.action}`}
+          action={`/v0.1/ceqas${this.props.action}`}
           onChange={this.onChange}>
           <Button>
             <Icon type="upload" />导入Excel数据

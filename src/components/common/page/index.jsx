@@ -37,11 +37,11 @@ export default smart(state => {
     }
 
     getExport = () => {
-      window.open(`http://119.23.9.49/v0.1/ceqas/${this.props.downloadUri}/export?is-template=false&token=${localStorage.getItem('accessToken')}`)
+      window.open(`http://117.34.70.238/v0.1/ceqas/${this.props.downloadUri}/export?is-template=false&token=${localStorage.getItem('accessToken')}`)
     }
     
     getTemplateExport = () => {
-      window.open(`http://119.23.9.49/v0.1/ceqas/${this.props.downloadUri}/export?is-template=true&token=${localStorage.getItem('accessToken')}`)
+      window.open(`http://117.34.70.238/v0.1/ceqas/${this.props.downloadUri}/export?is-template=true&token=${localStorage.getItem('accessToken')}`)
     }
 
     render() {
