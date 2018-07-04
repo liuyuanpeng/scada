@@ -36,6 +36,30 @@ class Rules extends Component {
   columns = () => {
     return [
       {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      }, {
+        title: '类型',
+        dataIndex: 'study_mode',
+        key: 'study_mode',
+        render: (text, record) => {
+          if (!text) {
+            return ''
+          }
+          const modes = text.split('|')
+          const modeNames = this.props.studyMode && modes.map(code => {
+            const rt = this.props.studyMode.find((item) => {
+              return item.code === code
+            })
+            return rt.name
+          })
+          return modeNames ? modeNames.join('、') : ''
+        }
+      }, {
         title: '培养层次',
         dataIndex: 'education_level',
         key: 'education_level',
@@ -52,6 +76,10 @@ class Rules extends Component {
           })
           return modeNames ? modeNames.join('、') : ''
         }
+      }, {
+        title: '其他培养层次',
+        dataIndex: 'other_education_level',
+        key: 'other_education_level'
       }, {
         title: '专业代码',
         dataIndex: 'subject_code',
@@ -98,6 +126,10 @@ class Rules extends Component {
         render: (text, record) => {
           return text ? '是' : '否'
         }
+      }, {
+        title: '记录时间',
+        dataIndex: 'current_year',
+        key: 'current_year'
       }, {
         title: '操作',
         dataIndex: 'operation',

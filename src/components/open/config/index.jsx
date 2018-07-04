@@ -21,6 +21,13 @@ class Config extends Component {
   columns = () => {
     return [
       {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      }, {
         title: '一级代码',
         dataIndex: 'code',
         key: 'code'

@@ -38,6 +38,30 @@ class Rules extends Component {
   columns = () => {
     return [
       {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      }, {
+        title: '教育类型',
+        dataIndex: 'category',
+        key: 'category',
+        render: (text, record) => {
+          if (!text) {
+            return ''
+          }
+          const modes = text.split('|')
+          const modeNames = this.props.educationCategory && modes.map(code => {
+            const rt = this.props.educationCategory.find((item) => {
+              return item.code === code
+            })
+            return rt.name
+          })
+          return modeNames ? modeNames.join('、') : ''
+        }
+      }, {
         title: '类型',
         dataIndex: 'study_mode',
         key: 'study_mode',
@@ -54,8 +78,7 @@ class Rules extends Component {
           })
           return modeNames ? modeNames.join('、') : ''
         }
-      },
-      {
+      }, {
         title: '培养层次',
         dataIndex: 'education_level',
         key: 'education_level',
@@ -72,6 +95,10 @@ class Rules extends Component {
           })
           return modeNames ? modeNames.join('、') : ''
         }
+      }, {
+        title: '其他培养层次',
+        dataIndex: 'other_education_level',
+        key: 'other_education_level'
       }, {
         title: '专业代码',
         dataIndex: 'subject_code',
@@ -102,6 +129,10 @@ class Rules extends Component {
           return modeNames ? modeNames.join('、') : ''
         }
       }, {
+        title: '其他招考方式',
+        dataIndex: 'other_exam_entrance',
+        key: 'other_exam_entrance'
+      }, {
         title: '专业年度招生人数',
         dataIndex: 'enroll_number',
         key: 'enroll_number'
@@ -113,6 +144,10 @@ class Rules extends Component {
         title: '当年毕业生人数',
         dataIndex: 'graduate_number',
         key: 'graduate_number'
+      }, {
+        title: '记录时间',
+        dataIndex: 'current_year',
+        key: 'current_year'
       }, {
         title: '操作',
         dataIndex: 'operation',

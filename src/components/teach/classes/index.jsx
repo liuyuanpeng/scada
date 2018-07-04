@@ -36,6 +36,13 @@ class TeachClasses extends Component {
   columns = () => {
     return [
       {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      }, {
         title: '类型',
         dataIndex: 'study_mode',
         key: 'study_mode',

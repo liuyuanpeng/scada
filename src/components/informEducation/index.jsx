@@ -32,6 +32,13 @@ class InformEducation extends Component {
   columns = () => {
     return [
       {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      }, {
         title: '非学历继续教育项目',
         dataIndex: 'name',
         key: 'name'

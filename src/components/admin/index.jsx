@@ -21,6 +21,14 @@ class Admin extends Component {
   getColumns = () => {
     return [
       {
+        key: 'index',
+        title: '序号',
+        dataIndex: 'index',
+        render: (text, record, index) => {
+          return <span>{`${index + 1}`}</span>
+        }
+      },
+      {
         key: 'college_code',
         title: '学校代码',
         dataIndex: 'college_code'
