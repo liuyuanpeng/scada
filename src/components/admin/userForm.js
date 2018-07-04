@@ -53,6 +53,16 @@ export default Form.create()(
                 <Input />
               )}
             </FormItem>
+            <FormItem label="邮箱">
+              {getFieldDecorator('email', {
+                rules: [
+                  {
+                    required: true, message: '请输入邮箱'
+                  }]
+              })(
+                <Input />
+              )}
+            </FormItem>
             <FormItem label="密码">
               {getFieldDecorator('password', {
                 rules: [

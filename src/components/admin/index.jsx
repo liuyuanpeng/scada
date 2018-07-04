@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Input, Button } from 'antd'
+import { Table, Input, Button, Icon, message } from 'antd'
 import { smart, actions } from 'cat-eye'
 import UserForm from './userForm'
+import EmailForm from './emailForm'
 import CollegeForm from './collegeForm'
 import md5 from 'md5'
 import Page from 'components/common/page'
@@ -11,7 +12,9 @@ class Admin extends Component {
     super(props)
     this.state = {
       visible: false,
-      addCollege: false
+      addCollege: false,
+      modifyEmail: false,
+      formData: {}
     }
   }
   componentWillMount() {
@@ -43,8 +46,44 @@ class Admin extends Component {
         title: '管理员',
         dataIndex: 'user',
         render: (text, record) => text || (<Button type="primary" onClick={() => this.onAdd(record.id)} >新增</Button>)
+      },
+      {
+        key: 'email',
+        title: '邮箱',
+        dataIndex: 'email'
+      },
+      {
+        title: '操作',
+        dataIndex: 'operation',
+        key: 'operation',
+        render: (text, record) => {
+          if (record.user_id === null || record.user_id === '') {
+            return '';
+          }
+          return <div>
+            <Button onClick={() => this.onModifyEmail(record)} style={{ marginRight: 15 }} ><Icon type="edit" />编辑用户邮箱</Button>
+            <Button onClick={() => this.sendUserInfo(record.user_id)} ><Icon type="mail" />发送账户信息</Button>
+          </div>
+        }
       }
     ]
+  }
+  
+  onModifyEmail = (record) => {
+    this.modifyUserId=record.user_id
+    this.setState({
+      modifyEmail: true,
+      formData: record
+    })
+  }
+  
+  sendUserInfo = (userId) => {
+    actions.admin.resetUserPassword(userId).then(res => {
+          message.info('发送账户信息成功!')
+        })
+        .catch(e => {
+          message.error('发送账户信息失败!')
+        })
   }
 
   onAdd = (id) => {
@@ -62,7 +101,9 @@ class Admin extends Component {
           id: item.college.id,
           college_code: item.college.college_code,
           name: item.college.name,
-          user: item.user ? item.user.username : ''
+          user: item.user ? item.user.username : '',
+          user_id: item.user ? item.user.id : '',
+          email: item.user ? item.user.email : ''
         }
       })
       return list
@@ -73,7 +114,8 @@ class Admin extends Component {
   handleCancel = () => {
     this.setState({
       visible: false,
-      addCollege: false
+      addCollege: false,
+      modifyEmail: false
     })
   }
 
@@ -87,6 +129,7 @@ class Admin extends Component {
         user: {
           maintain_id: this.editId,
           username: values.name,
+          email: values.email,
           role: 'COLLEGE'
         },
         user_auth: {
@@ -97,8 +140,34 @@ class Admin extends Component {
       this.setState({ visible: false })
     })
   }
+  
+  handleModifyEmail = () => {
+    const form = this.emailFormRef.props.form
+    form.validateFields((err, values) => {
+      if (err) {
+        return
+      }
+      actions.admin.modifyUserEmail({
+        id: this.modifyUserId,
+        email: values.email
+      })
+        .then(res => {
+          message.info('操作成功!')
+        })
+        .catch(e => {
+          message.error('操作失败!')
+        })
+      form.resetFields()
+      this.setState({ modifyEmail: false })
+    })
+  }
+  
   saveFormRef = (formRef) => {
     this.formRef = formRef
+  }
+  
+  modifyEmailFormRef = (formRef) => {
+    this.emailFormRef = formRef
   }
 
   saveCollegeFormRef = (formRef) => {
@@ -142,6 +211,13 @@ class Admin extends Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           onCreate={this.handleOk}
+        />
+        <EmailForm
+          wrappedComponentRef={this.modifyEmailFormRef}
+          data={this.state.formData}
+          visible={this.state.modifyEmail}
+          onCancel={this.handleCancel}
+          onCreate={this.handleModifyEmail}
         />
         <CollegeForm
           wrappedComponentRef={this.saveCollegeFormRef}
