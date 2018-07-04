@@ -107,8 +107,18 @@ class GenderAgeJob extends Component {
           render: (text, record) => {
             let config = ''
             !config && (config = this.props.coursewareMedia.find(item => item.code === text))
+//          var configName;
+//          if (!config) {
+//            if (config.code === 'COURSEWARE_APPLY_RESOURCE_OTHER' && record.other_apply_name !== null && record.other_apply_name !== '') {
+//              configName = record.other_apply_name;
+//            } else {
+//              configName = config.name;
+//            }
+//          } else {
+//            configName = config.name;
+//          }
             return <span className={styles['header-style']}>
-              {(!config || config.code === 'COURSEWARE_APPLY_RESOURCE_OTHER') ? record.other_apply_name : config.name}
+              {config ? config.name : '未知'}
             </span>
           }
         }, {
@@ -249,7 +259,7 @@ class GenderAgeJob extends Component {
 
     const columns = this.constructColumns(this.columns())
     return (
-      <Page importUri={'/courseware-apply/import'} onSuccess={this.onUploadOK} showYear>
+      <Page showYear>
         <Table
           bordered
           rowClassName={styles['editable-row']}
