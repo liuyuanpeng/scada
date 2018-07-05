@@ -78,10 +78,13 @@ class Admin extends Component {
   }
   
   sendUserInfo = (userId) => {
+    message.loading('邮件发送中，请稍候...', 5)
     actions.admin.resetUserPassword(userId).then(res => {
+          message.destroy()
           message.info('发送账户信息成功!')
         })
         .catch(e => {
+          message.destroy()
           message.error('发送账户信息失败!')
         })
   }

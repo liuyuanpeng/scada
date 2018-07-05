@@ -16,7 +16,7 @@ request.config({
     return data.status === 200
   },
   loading: function (params) {
-    this.hideTip = message.loading('请求仍在进行，请稍候...', 15)
+    this.hideTip = message.loading('请求仍在进行，请稍候...', 10)
   },
   error: function (res) {
     let msg = getIn(res, 'data.meta.message') || '您的请求遇到了错误，请稍候再试'

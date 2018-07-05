@@ -8,6 +8,7 @@ ce.model({
   name: 'user',
   state: {
     data: {
+      userId: localStorage.getItem('userId'),
       name: localStorage.getItem('name')
     },
     accessToken: localStorage.getItem('accessToken'),
@@ -60,8 +61,9 @@ ce.model({
           customError: true
         })
         .then(data => {
-          const { username, role } = data.data.user
+          const { id, username, role } = data.data.user
           const { token, expires } = data.data.user_session
+          localStorage.setItem('userId', id)
           localStorage.setItem('name', username)
           localStorage.setItem('accessToken', token)
           localStorage.setItem('expires', expires)
@@ -70,7 +72,7 @@ ce.model({
           data.data.college && localStorage.setItem('collegeId', data.data.college.id)
           generateMenus()
           this.setField({
-            data: { name: username },
+            data: { userId: id, name: username },
             role,
             accessToken: token,
             expires: expires,
@@ -88,6 +90,7 @@ ce.model({
       localStorage.removeItem('accessToken')
       localStorage.removeItem('expires')
       localStorage.removeItem('createTime')
+      localStorage.removeItem('userId')
       localStorage.removeItem('name')
       localStorage.removeItem('role')
       localStorage.removeItem('openKeys')

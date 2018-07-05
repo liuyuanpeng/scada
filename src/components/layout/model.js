@@ -10,10 +10,10 @@ ce.model({
   effects: {
     getConfigMap() {
       return api
-        .get('open-config/map')
+        .get('/open-config/map')
         .then(res => {
           this.setField({
-            config: res.data
+            config: res ? res.data : {}
           })
         })
     }
