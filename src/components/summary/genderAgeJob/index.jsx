@@ -21,9 +21,11 @@ class EditableCell extends React.Component {
   }
 
   check = () => {
-    if (!parseInt(this.state.value)) {
-      message.error('请输入合理的数字!')
-      return
+    if (this.state.value !== '0') {
+      if (!parseInt(this.state.value)) {
+        message.error('请输入合理的数字!')
+        return
+      }
     }
     this.setState({ editable: false })
     if (this.props.onChange) {
