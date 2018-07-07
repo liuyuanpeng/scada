@@ -107,6 +107,11 @@ export default Form.create({
                 <Input placeholder="请输入专业代码" />
               )}
             </FormItem>
+            <FormItem label="专业名称">
+              {getFieldDecorator('subject_name')(
+                <Input placeholder="请输入专业名称" />
+              )}
+            </FormItem>
             <FormItem label="专业方向">
               {getFieldDecorator('subject_direction')(
                 <Input placeholder="请输入专业方向" />

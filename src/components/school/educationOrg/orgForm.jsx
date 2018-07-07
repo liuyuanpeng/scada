@@ -75,7 +75,7 @@ export default Form.create({
                 </RadioGroup>
               )}
             </FormItem>
-            <FormItem label="自学考试">
+            <FormItem label="非学历培训">
               {getFieldDecorator('has_non_degree_education')(
                 <RadioGroup>
                   <Radio value={'yes'}>有</Radio>
