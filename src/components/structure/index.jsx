@@ -286,7 +286,7 @@ class GenderAgeJob extends Component {
 
     const columns = this.constructColumns(this.columns())
     return (
-      <Page importUri={'/teacher/import'} onSuccess={this.onUploadOK} showYear configType="STUDY_MODE" downloadUri='teacher' >
+      <Page showYear configType="STUDY_MODE" >
         <Table
           bordered
           rowClassName={styles['editable-row']}

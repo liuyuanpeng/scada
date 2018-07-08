@@ -93,22 +93,12 @@ export default Form.create({
               }
             </FormItem>
             <FormItem label="专业代码">
-              {getFieldDecorator('subject_code', {
-                rules: [
-                  {
-                    required: true, message: '请输入专业代码'
-                  }]
-              })(
+              {getFieldDecorator('subject_code')(
                 <Input placeholder="请输入专业代码" />
               )}
             </FormItem>
             <FormItem label="专业名称">
-              {getFieldDecorator('subject_name', {
-                rules: [
-                  {
-                    required: true, message: '请输入专业名称'
-                  }]
-              })(
+              {getFieldDecorator('subject_name')(
                 <Input placeholder="请输入专业名称" />
               )}
             </FormItem>
@@ -137,10 +127,14 @@ export default Form.create({
                 <Input placeholder="请输入选修课学时要求" />
               )}
             </FormItem>
-
             <FormItem label="实践教学学分要求">
               {getFieldDecorator('practice_study_point')(
                 <Input placeholder="请输入当年实践教学学时要求" />
+              )}
+            </FormItem>
+            <FormItem label="毕业实践学分要求">
+              {getFieldDecorator('graduate_practice_study_point')(
+                <Input placeholder="请输入毕业实践学分要求" />
               )}
             </FormItem>
             <FormItem label="是否为特色专业">
