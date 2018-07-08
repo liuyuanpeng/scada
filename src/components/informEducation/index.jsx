@@ -68,6 +68,9 @@ class InformEducation extends Component {
         dataIndex: 'education_mode',
         key: 'education_mode',
         render: (text, record) => {
+          if (!text) {
+            return ''
+          }
           const modes = text.split('|')
           const modeNames = this.props.educationMode && modes.map(code => {
             const rt = this.props.educationMode.find((item) => {
