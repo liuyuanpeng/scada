@@ -29,7 +29,7 @@ ce.model({
     },
     save(config) {
       return api
-        .put('/open-config/update-config', {
+        .post('/open-config/save-config', {
           data: config,
           complete: () => {
             this.setField({
@@ -39,7 +39,7 @@ ce.model({
         })
         .then(res => {
           let data = this.getState().data.concat()
-          if (config.code) {
+          if (config.create_user) {
             // 修改
             for (let i = 0; i < data.length; i++) {
               if (data[i].code === config.code) {

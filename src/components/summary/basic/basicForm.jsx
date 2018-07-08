@@ -83,7 +83,9 @@ export default Form.create({
               {getFieldDecorator('study_mode')(
                 <CheckboxGroup>
                   {this.props.studyMode && this.props.studyMode.map((item, index) => {
-                    return <Checkbox key={`${index}`} value={item.code}>{item.name}</Checkbox>
+                    if (item && item.code !== 'STUDY_MODE_ALL') {
+                      return <Checkbox key={`${index}`} value={item.code}>{item.name}</Checkbox>
+                    }
                   })}
                 </CheckboxGroup>
               )}

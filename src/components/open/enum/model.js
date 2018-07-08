@@ -28,7 +28,7 @@ ce.model({
     },
     save(configEnum) {
       return api
-        .put('/open-config/update-config-enum', {
+        .post('/open-config/save-config-enum', {
           data: configEnum,
           complete: () => {
             this.setField({
@@ -38,7 +38,7 @@ ce.model({
         })
         .then(res => {
           let data = this.getState().data.concat()
-          if (configEnum.code) {
+          if (configEnum.create_user) {
             // 修改
             for (let i = 0; i < data.length; i++) {
               if (data[i].code === configEnum.code) {
