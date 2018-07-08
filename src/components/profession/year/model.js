@@ -62,7 +62,7 @@ ce.model({
     },
     deleteById(id) {
       return api
-        .delete('/major-setup-year-system/' + id, {
+        .post('/major-setup-year-system/' + id, {
           complete: () => {
             this.setField({
               loading: false

@@ -56,7 +56,7 @@ ce.model({
     },
     deleteById(id) {
       return api
-        .delete('/public-study-center/' + id, {
+        .post('/public-study-center/' + id, {
           complete: () => {
             this.setField({
               loading: false

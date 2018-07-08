@@ -57,7 +57,7 @@ ce.model({
     },
     deleteById(id) {
       return api
-        .delete('/organization-scale/' + id, {
+        .post('/organization-scale/' + id, {
           complete: () => {
             this.setField({
               loading: false

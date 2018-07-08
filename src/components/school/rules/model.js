@@ -92,7 +92,7 @@ ce.model({
     deleteByRegulationId(regulationId) {
       // 删除学校继续教育规章制度
       return api
-        .delete('/college-regulation/' + regulationId, {
+        .post('/college-regulation/' + regulationId, {
           complete: () => {
             this.setField({
               loading: false

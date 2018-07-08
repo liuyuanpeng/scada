@@ -60,7 +60,7 @@ ce.model({
     deleteByOrganizationId(organizationId) {
       // 删除继续教育机构基本信息
       return api
-        .delete('/organization/' + organizationId, {
+        .post('/organization/' + organizationId, {
           complete: () => {
             this.setField({
               loading: false

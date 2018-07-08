@@ -56,7 +56,7 @@ ce.model({
     },
     deleteById(id) {
       return api
-        .delete('/non-degree-continue-education-status/' + id, {
+        .post('/non-degree-continue-education-status/' + id, {
           complete: () => {
             this.setField({
               loading: false
