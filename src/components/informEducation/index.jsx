@@ -55,7 +55,7 @@ class InformEducation extends Component {
             const rt = this.props.enrollStudent.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -76,7 +76,7 @@ class InformEducation extends Component {
             const rt = this.props.educationMode.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }

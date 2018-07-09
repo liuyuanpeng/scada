@@ -56,7 +56,7 @@ class SupportCorp extends Component {
             const rt = this.props.cooperatorNature.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -80,7 +80,7 @@ class SupportCorp extends Component {
             const rt = this.props.educationLevel.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }

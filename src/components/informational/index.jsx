@@ -66,7 +66,7 @@ class Informational extends Component {
             const rt = this.props.source.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }

@@ -67,7 +67,7 @@ class SupportBasic extends Component {
             const rt = this.props.evaluateStatus.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -84,7 +84,7 @@ class SupportBasic extends Component {
             const rt = this.props.centerNature.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }

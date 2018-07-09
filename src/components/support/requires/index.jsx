@@ -55,7 +55,7 @@ class SupportRequires extends Component {
             const rt = this.props.referenceAnswerTime.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -82,7 +82,7 @@ class SupportRequires extends Component {
             const rt = this.props.complaintAnswerTime.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }

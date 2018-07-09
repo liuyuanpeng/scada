@@ -55,7 +55,7 @@ class TeachClasses extends Component {
             const rt = this.props.studyMode.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
@@ -72,7 +72,7 @@ class TeachClasses extends Component {
             const rt = this.props.educationLevel.find((item) => {
               return item.code === code
             })
-            return rt.name
+            return rt && rt.name
           })
           return modeNames ? modeNames.join('、') : ''
         }
