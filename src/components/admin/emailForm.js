@@ -34,12 +34,7 @@ export default Form.create({
               )}
             </FormItem>
             <FormItem label="邮箱">
-              {getFieldDecorator('email', {
-                rules: [
-                  {
-                    required: true, message: '请输入邮箱'
-                  }]
-              })(
+              {getFieldDecorator('email')(
                 <Input />
               )}
             </FormItem>
